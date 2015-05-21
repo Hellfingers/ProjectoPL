@@ -52,7 +52,7 @@ Fator	->	Var
 		|	'!' Exp
 		
 Comp	->	Exp
-		|	Exp OpCond Exp
+		|	Exp OpConp Exp
 
 OpComp	->	'>'
 		|	'<'
