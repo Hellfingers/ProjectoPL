@@ -51,15 +51,8 @@ Fator	->	Var
 		|	'(' Exp ')'
 		|	'!' Exp
 		
-Cond	->	Exp
-		|	Cond OpCond Exp
-		
-OpCond	->	'&&'
-		|	'||'
-		
 Comp	->	Exp
-		|	'!' Comp
-		|	Comp OpComp	Exp
+		|	Exp OpCond Exp
 
 OpComp	->	'>'
 		|	'<'
