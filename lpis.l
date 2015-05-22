@@ -1,5 +1,5 @@
 %{
-	#include "y.tab.h"
+	#include <stdlib.h>
 %}
 %x COMENTARIO
 
@@ -8,11 +8,40 @@ pal [a-zA-Z]+
 
 %%
 
-";"       { return yytext[0]; }
-"int"     { return INT; }
-{pal}	  { yylval.id = stdup(yytext);return id;}
+"int"	     	{ 
+					return INT; 
+				}
 
-.|\n      { ; }
+"if"			{
+					return IF;
+				}
+
+"while"			{
+					return WHILE;
+				}
+
+"for"			{
+					return FOR;
+				}
+
+[<>()\{\}\[\];=+*\/]    {
+					return yytext[0]; 
+				}
+
+{pal}			{ 
+					yylval.valc = strdup(yytext);
+					return id;
+				}
+
+{num}			{
+					yylval.vali = atoi(yytext);
+					return num;
+				}
+
+
+.|\n      		{ 
+					; 
+				}
 
 %%
 

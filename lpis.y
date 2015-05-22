@@ -3,12 +3,18 @@
 
 %}
 
-%union {int num;char id;}
+%union {
+	int vali;
+	char* valc;
+}
 
-%token INT IF ELSE WHILE FOR print input
+%token INT IF ELSE WHILE FOR PRINT INPUT
 
-%token <id> id
-%token <num> num
+%token <valc> id
+%token <vali> num
+
+%type <valc> Var
+%type <vali> Exp Termo Fator
 
 
 %%
@@ -20,43 +26,34 @@ Decls	:	InitVar			{}
 		|	Decls InitVar	{}
 		;
 
-InitVar	:	INT Var ';'	{printf("Variavel!");}
+InitVar	:	INT Var ';'		{printf("Variavel!\n");}
 		;
 
 Var		:	id				{}
-		|	id '[' Exp ']'	{}
+		|	id '[' num ']'	{}
 		;
 
 Instrs	:	Instr 			{}
 		|	Instrs Instr 	{}
 		;	
 
-Instr	:	If 				{}		
-		|	While 			{}
-		|	For 			{}
-		|	Atr	';'			{}
-		|	IO	';'			{}
+Instr	:					{}
+		|	If 				{printf("if!\n");}
+		|	While 			{printf("while!\n");}
+		|	For 			{printf("for!\n");}
+		|	Atr	';'			{printf("ATRIBUICAO!\n");}
 		;
 
-If		:	IF '(' Comp ')' '{' Instrs '}'						{}
-		|	IF '(' Comp ')' '{' Instrs '}' ELSE '{' Instrs '}'	{}
+If 		:	IF '(' Comp ')' '{' Instrs '}'						{}
 		;
 
 While 	: 	WHILE '(' Comp ')' '{' Instrs '}'						{}
 		;
 
-For		:	FOR '(' Atr ',' Comp ',' Atr ')' '{' Instrs '}'		{}
+For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'		{}
 		;
 
 Atr		:	Var '='	Exp		{}
-		;
-
-IO		:	print Out		{}
-		|	input Var 	{}
-		;
-
-Out		:	Exp				{}
-		|	'\"' id '\"'	{}
 		;
 
 Exp		:	Termo			{}
@@ -89,8 +86,14 @@ Comp	:	Exp				{}
 
 OpComp	:	'>'
 		|	'<'
+		|	'<''='
+		|	'>''='
+		|	'=''='
+		|	'!''='
 		;
+
 %%
+
 #include "lex.yy.c"
 
 int yyerror(char *s){
