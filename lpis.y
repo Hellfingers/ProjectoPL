@@ -42,6 +42,7 @@ Instr	:					{}
 		|	While 			{printf("while!\n");}
 		|	For 			{printf("for!\n");}
 		|	Atr	';'			{printf("ATRIBUICAO!\n");}
+		|	IO ';'			{}
 		;
 
 If 		:	IF '(' Comp ')' '{' Instrs '}'						{}
@@ -51,6 +52,14 @@ While 	: 	WHILE '(' Comp ')' '{' Instrs '}'						{}
 		;
 
 For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'		{}
+		;
+
+IO		:	PRINT Out		{printf("print!\n");}
+		|	INPUT Var 	{printf("input!\n");}
+		;
+		
+Out		:	Exp				{}
+		|	'\"' id '\"'	{}
 		;
 
 Atr		:	Var '='	Exp		{}

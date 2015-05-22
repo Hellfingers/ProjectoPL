@@ -24,6 +24,14 @@ pal [a-zA-Z]+
 					return FOR;
 				}
 
+"print"			{
+					return PRINT;
+				}
+
+"input"			{
+					return INPUT;
+				}
+
 [<>()\{\}\[\];=+*\/]    {
 					return yytext[0]; 
 				}
