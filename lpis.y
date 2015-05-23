@@ -1,5 +1,8 @@
 %{
 	#include <stdio.h>
+	#include "hashTable.h"
+
+	HashTable symbolTable;
 
 %}
 
@@ -12,10 +15,6 @@
 
 %token <valc> id
 %token <vali> num
-
-%type <valc> Var
-%type <vali> Exp Termo Fator
-
 
 %%
 
@@ -57,7 +56,7 @@ For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'		{}
 IO		:	PRINT Out		{printf("print!\n");}
 		|	INPUT Var 	{printf("input!\n");}
 		;
-		
+
 Out		:	Exp				{}
 		|	'\"' id '\"'	{}
 		;
@@ -110,6 +109,8 @@ int yyerror(char *s){
 }
      
 int main(){
+
+	symbolTable = hashCreate(1000);
 	yyparse(); 
 	return 0; 
 }	

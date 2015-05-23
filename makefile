@@ -1,5 +1,5 @@
 lpis: lex.yy.c y.tab.c
-	gcc -g y.tab.c -o lpis
+	gcc -g hashTable.c y.tab.c -o lpis
 
 lex.yy.c: y.tab.c lpis.l
 	flex lpis.l
