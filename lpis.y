@@ -11,17 +11,19 @@
 		res = hashInsert(symbolTable, symb, type);
 
 		if(res == 0)
-			printf("%s ja definida!!\n",symb);
+			printf("Variável '%s' já definida.\n",symb);
 	}
 
-	void checkSymbol(char* symb){
+	int checkSymbol(char* symb){
 
 		int res;
 
 		res = hashContains(symbolTable, symb);
 
 		if(res == 0)
-			printf("%s não definida!!\n",symb);
+			printf("Variável '%s' não definida.\n",symb);
+
+		return res;
 	}
 
 	void checkSymbolInit(char* symb){
@@ -31,7 +33,7 @@
 		res = hashIsInit(symbolTable, symb);
 
 		if(res == 0)
-			printf("%s não inicializada!!\n",symb);
+			printf("Variável '%s' não inicializada!\n",symb);
 	}
 
 	void initSymbol(char* symb){
@@ -75,10 +77,10 @@ Instrs	:	Instr 			{}
 		;	
 
 Instr	:					{}
-		|	If 				{printf("if!\n");}
-		|	While 			{printf("while!\n");}
-		|	For 			{printf("for!\n");}
-		|	Atr	';'			{printf("ATRIBUICAO!\n");}
+		|	If 				{}
+		|	While 			{}
+		|	For 			{}
+		|	Atr	';'			{}
 		|	IO ';'			{}
 		;
 
@@ -91,15 +93,18 @@ While 	: 	WHILE '(' Comp ')' '{' Instrs '}'						{}
 For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'		{}
 		;
 
-IO		:	PRINT Out		{printf("print!\n");}
-		|	INPUT Var 	{printf("input!\n");}
+IO		:	PRINT Out		{}
+		|	INPUT Var 		{}
 		;
 
 Out		:	Exp				{}
 		|	'\"' id '\"'	{}
 		;
 
-Atr		:	Var '='	Exp		{checkSymbol($1);initSymbol($1);}
+Atr		:	Var '='	Exp		{
+								if(checkSymbol($1))
+									initSymbol($1);
+							}
 		;
 
 Exp		:	Termo			{}
@@ -120,7 +125,10 @@ OpM		:	'*'				{}
 		|	'|' '|'			{}
 		;
 
-Fator	:	Var 			{checkSymbolInit($1);}
+Fator	:	Var 			{
+								if(checkSymbol($1))
+									checkSymbolInit($1);
+							}
 		|	num				{}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
