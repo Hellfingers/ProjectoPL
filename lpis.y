@@ -4,6 +4,42 @@
 
 	HashTable symbolTable;
 
+	void insertSymbol(char* symb, char* type){
+
+		int res;
+
+		res = hashInsert(symbolTable, symb, type);
+
+		if(res == 0)
+			printf("%s ja definida!!\n",symb);
+	}
+
+	void checkSymbol(char* symb){
+
+		int res;
+
+		res = hashContains(symbolTable, symb);
+
+		if(res == 0)
+			printf("%s não definida!!\n",symb);
+	}
+
+	void checkSymbolInit(char* symb){
+
+		int res;
+
+		res = hashIsInit(symbolTable, symb);
+
+		if(res == 0)
+			printf("%s não inicializada!!\n",symb);
+	}
+
+	void initSymbol(char* symb){
+
+		hashInit(symbolTable, symb);
+
+	}
+
 %}
 
 %union {
@@ -16,6 +52,8 @@
 %token <valc> id
 %token <vali> num
 
+%type <valc> Var
+
 %%
 
 Prog	:	Decls Instrs	{}
@@ -25,10 +63,10 @@ Decls	:	InitVar			{}
 		|	Decls InitVar	{}
 		;
 
-InitVar	:	INT Var ';'		{printf("Variavel!\n");}
+InitVar	:	INT Var ';'		{insertSymbol($2,"int");}
 		;
 
-Var		:	id				{}
+Var		:	id				{$$ = $1;}
 		|	id '[' num ']'	{}
 		;
 
@@ -61,7 +99,7 @@ Out		:	Exp				{}
 		|	'\"' id '\"'	{}
 		;
 
-Atr		:	Var '='	Exp		{}
+Atr		:	Var '='	Exp		{checkSymbol($1);initSymbol($1);}
 		;
 
 Exp		:	Termo			{}
@@ -82,7 +120,7 @@ OpM		:	'*'				{}
 		|	'|' '|'			{}
 		;
 
-Fator	:	Var 			{}
+Fator	:	Var 			{checkSymbolInit($1);}
 		|	num				{}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
