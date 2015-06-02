@@ -70,35 +70,25 @@ Este relatório documentará todos os passos tomados na realização do segundo 
 \chapter{Introdução} \label{intro}
 
 \begin{description}
-  \item [Enquadramento] \textbf{bla bla} bla bla
-  \item [Conteúdo do documento] \textsf{ble ble} \texttt{ble} ble
-  \item [Resultados -- pontos a evidenciar] \emph{bli bli bli bli}
-  \item [Estrutura do documento] \underline{blo blo blo}
+  \item [Enquadramento] Um \textbf{compilador} é uma peça de software que transforma o código fonte numa dada linguagem de alto nível em instruções que a máquina entenda (Código Máquina). As fazes da compilação incluem:\\Análise léxica\\Análise Sintática\\Análise Semântica\\Geração de Código
+  \item [Conteúdo do documento] Neste documento encontrar-se-ão as fases de resolução do problema especificado
+  \item [Resultados -- pontos a evidenciar] O resultado do projecto a desenvolver será um gerador de códigoassembly para uma máquina de stacks virtual, partindo de uma Linguagem de Programação Imperativa Simples.
 \end{description}
 
 
 
 \section*{Estrutura do Relatório} \
-explicar como está organizado o documento, referindo os capítulos existentes
-e a sua articulação explicando o conteúdo de cada um.
-No capítulo de Análise e Especificaçao faz-se uma análise detalhada do problema proposto
-de modo a poder-se especificar  as entradas, resultados e formas de transformação.\\
-etc. \ldots\\
-No capítulo de Conclusões termina-se o relatório com uma síntese do que foi dito,
-as conclusões e o trabalho futuro
+No capítulo \ref{analiseEsp} iremos fazer um esboço do que queremos que seja a nossa linguagem de programação (Gramática Independente do Contexto), para além de alguns exemplos de frases que tenham erros sintáticos, semânticos e frases correctas segundo a nossa especificação. No capítulo \ref{concepcao} iremos apresentar a estrutura de dados auxiliar à análise semântica e sua utilização no compilador a desenvolver. No capítulo \ref{code} iremos apresentar os passos utilizados para geração de código, se possível ou, em alternativa notificaçao de erro sintático. Finalmente, no capítulo \ref{conc} faremos uma apreciação crítica do trabalho realizado e trabalhos futuros. Em anexo iremos colocar o código desenvolvido que permitirá a geração de código máquina.
 
-\chapter{Análise e Especificação} 
+\chapter{Análise e Especificação} \label{analiseEsp}
 \section{Descrição informal do problema}
 \section{Especificação do Requisitos}
-\subsection{Dados}
-\subsection{Pedidos}
-\subsection{Relações}
 
-\chapter{Concepção/desenho da Resolução}
+\chapter{Concepção/desenho da Resolução} \label{concepcao}
 \section{Estruturas de Dados}
-\section{Algoritmos}
 
-\chapter{Codificação e Testes}
+
+\chapter{Codificação e Testes} \label {code}
 \section{Alternativas, Decisões e Problemas de Implementação}
 \section{Testes realizados e Resultados}
 Mostram-se a seguir alguns testes feitos (valores introduzidos) e
@@ -107,7 +97,7 @@ os respectivos resultados obtidos:
 %\VerbatimInput{teste1.txt}
 
 
-\chapter{Conclusão}
+\chapter{Conclusão} \label {conc}
 Síntese do Documento.\\
 Estado final do projecto; Análise crítica dos resultados.\\
 Trabalho futuro.
