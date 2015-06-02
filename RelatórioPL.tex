@@ -78,14 +78,36 @@ Este relatório documentará todos os passos tomados na realização do segundo 
 
 
 \section*{Estrutura do Relatório} \
-No capítulo \ref{analiseEsp} iremos fazer um esboço do que queremos que seja a nossa linguagem de programação (Gramática Independente do Contexto), para além de alguns exemplos de frases que tenham erros sintáticos, semânticos e frases correctas segundo a nossa especificação. No capítulo \ref{concepcao} iremos apresentar a estrutura de dados auxiliar à análise semântica e sua utilização no compilador a desenvolver. No capítulo \ref{code} iremos apresentar os passos utilizados para geração de código, se possível ou, em alternativa notificaçao de erro sintático. Finalmente, no capítulo \ref{conc} faremos uma apreciação crítica do trabalho realizado e trabalhos futuros. Em anexo iremos colocar o código desenvolvido que permitirá a geração de código máquina.
+No capítulo \ref{analiseEsp} iremos apresentar o caso de estudo em causa. No capítulo \ref{concepcao} iremos apresentar a estrutura de dados auxiliar à análise semântica e sua utilização no compilador a desenvolver, bem como fazer um esboço do que queremos que seja a nossa linguagem de programação (Gramática Independente do Contexto), para além de alguns exemplos de frases que tenham erros sintáticos, semânticos e frases correctas segundo a nossa especificação. No capítulo \ref{code} iremos apresentar os passos utilizados para geração de código, se possível ou, em alternativa notificaçao de erro sintático. Finalmente, no capítulo \ref{conc} faremos uma apreciação crítica do trabalho realizado e trabalhos futuros. Em anexo iremos colocar o código desenvolvido que permitirá a geração de código máquina.
 
 \chapter{Análise e Especificação} \label{analiseEsp}
+
 \section{Descrição informal do problema}
+Neste projecto é pretendido o desenho de uma Linguagem de Programação Imperativa Simples, para de seguida criar um compilador que gere pseudo-código Assembly de uma Máquina Virtual de Stacks
 \section{Especificação do Requisitos}
+Os requisitos para o compilador/linguagem a implementar são os seguintes:
+\begin{itemize}
+  \item Permitir manusear variáveis do tipo inteiro(escalar ou array).
+  \item Realizar as seguintes operações:
+	\begin{itemize}
+	\item Atribuições de expressões a variáveis.
+	\item Ler do Standard Input.
+	\item Escrever para o Standard Output.
+	\end{itemize}
+ \item Ciclos(for, while) e instruções Condicionais(if..else).
+ \item Operações Aritméticas, Relacionais e Lógicas sobre inteiros.
+ \item Indexação sobre arrays.
+ \item As declarações de variáveis deverão ser no início do programa.
+ \item Não deverá ser possível realizar redeclaraçoes nem utilizações sem declaraçao prévia.
+ \item Se não existirem atribuições a uma variável, o valor da mesma deverá ser indefinido
+\end{itemize}
 
 \chapter{Concepção/desenho da Resolução} \label{concepcao}
+\section{Gramática}
+Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C.\\
+%GIC
 \section{Estruturas de Dados}
+Para realizarmos a análise semântica temos uma tabela de Hash para guardar todos os identificadores de variáveis\ldots
 
 
 \chapter{Codificação e Testes} \label {code}
