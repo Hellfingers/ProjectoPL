@@ -1,0 +1,140 @@
+%
+% Layout retirado de http://www.di.uminho.pt/~prh/curplc09.html#notas
+%
+\documentclass{report}
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+%\usepackage{alltt}
+%\usepackage{fancyvrb}
+\usepackage{listings}
+%LISTING - GENERAL
+\lstset{
+	basicstyle=\small,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+    frame=tB,
+	mathescape=true,
+	escapeinside={(*@}{@*)}
+}
+%
+%\lstset{ %
+%	language=Java,							% choose the language of the code
+%	basicstyle=\ttfamily\footnotesize,		% the size of the fonts that are used for the code
+%	keywordstyle=\bfseries,					% set the keyword style
+%	%numbers=left,							% where to put the line-numbers
+%	numberstyle=\scriptsize,				% the size of the fonts that are used for the line-numbers
+%	stepnumber=2,							% the step between two line-numbers. If it's 1 each line
+%											% will be numbered
+%	numbersep=5pt,							% how far the line-numbers are from the code
+%	backgroundcolor=\color{white},			% choose the background color. You must add \usepackage{color}
+%	showspaces=false,						% show spaces adding particular underscores
+%	showstringspaces=false,					% underline spaces within strings
+%	showtabs=false,							% show tabs within strings adding particular underscores
+%	frame=none,								% adds a frame around the code
+%	%abovecaptionskip=-.8em,
+%	%belowcaptionskip=.7em,
+%	tabsize=2,								% sets default tabsize to 2 spaces
+%	captionpos=b,							% sets the caption-position to bottom
+%	breaklines=true,						% sets automatic line breaking
+%	breakatwhitespace=false,				% sets if automatic breaks should only happen at whitespace
+%	title=\lstname,							% show the filename of files included with \lstinputlisting;
+%											% also try caption instead of title
+%	escapeinside={\%*}{*)},					% if you want to add a comment within your code
+%	morekeywords={*,...}					% if you want to add more keywords to the set
+%}
+
+\usepackage{xspace}
+
+\parindent=0pt
+\parskip=2pt
+
+\def\darius{\textsf{Darius}\xspace}
+\def\java{\texttt{Java}\xspace}
+
+\title{Processamento de Linguagens (3º ano de Curso)\\ \textbf{Trabalho Prático 2}\\ Relatório de Desenvolvimento}
+\author{Jorge Miguel Sol Ferreira (a64293) \and Pedro José Freitas da Cunha (a67677) \and José Pedro Brito Pereira (a67680)\\Grupo 35 }
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este relatório documentará todos os passos tomados na realização do segundo trabalho prático da Unidade Curricular de Processamento de Linguagens.\\ Neste projecto é requerida a implementação de um compilador de uma Linguagem de Programação Imperativa Simples e posteriormente gerador de código assembly para uma máquina de stacks virtual.
+\end {abstract}
+\tableofcontents
+
+\chapter{Introdução} \label{intro}
+
+\begin{description}
+  \item [Enquadramento] \textbf{bla bla} bla bla
+  \item [Conteúdo do documento] \textsf{ble ble} \texttt{ble} ble
+  \item [Resultados -- pontos a evidenciar] \emph{bli bli bli bli}
+  \item [Estrutura do documento] \underline{blo blo blo}
+\end{description}
+
+
+
+\section*{Estrutura do Relatório} \
+explicar como está organizado o documento, referindo os capítulos existentes
+e a sua articulação explicando o conteúdo de cada um.
+No capítulo de Análise e Especificaçao faz-se uma análise detalhada do problema proposto
+de modo a poder-se especificar  as entradas, resultados e formas de transformação.\\
+etc. \ldots\\
+No capítulo de Conclusões termina-se o relatório com uma síntese do que foi dito,
+as conclusões e o trabalho futuro
+
+\chapter{Análise e Especificação} 
+\section{Descrição informal do problema}
+\section{Especificação do Requisitos}
+\subsection{Dados}
+\subsection{Pedidos}
+\subsection{Relações}
+
+\chapter{Concepção/desenho da Resolução}
+\section{Estruturas de Dados}
+\section{Algoritmos}
+
+\chapter{Codificação e Testes}
+\section{Alternativas, Decisões e Problemas de Implementação}
+\section{Testes realizados e Resultados}
+Mostram-se a seguir alguns testes feitos (valores introduzidos) e
+os respectivos resultados obtidos:
+
+%\VerbatimInput{teste1.txt}
+
+
+\chapter{Conclusão}
+Síntese do Documento.\\
+Estado final do projecto; Análise crítica dos resultados.\\
+Trabalho futuro.
+
+\appendix
+\chapter{Código do Programa}
+
+
+\begin{verbatim}
+      aqui deve aparecer o código do programa,
+      tal como está formato no ficheiro-fonte "darius.java"
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 
