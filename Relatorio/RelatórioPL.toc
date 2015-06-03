@@ -5,9 +5,13 @@
 \contentsline {section}{\numberline {2.2}Especifica\IeC {\c c}\IeC {\~a}o do Requisitos}{3}
 \contentsline {chapter}{\numberline {3}Concep\IeC {\c c}\IeC {\~a}o/desenho da Resolu\IeC {\c c}\IeC {\~a}o}{4}
 \contentsline {section}{\numberline {3.1}Gram\IeC {\'a}tica}{4}
-\contentsline {section}{\numberline {3.2}Estruturas de Dados}{4}
-\contentsline {chapter}{\numberline {4}Codifica\IeC {\c c}\IeC {\~a}o e Testes}{5}
-\contentsline {section}{\numberline {4.1}Alternativas, Decis\IeC {\~o}es e Problemas de Implementa\IeC {\c c}\IeC {\~a}o}{5}
-\contentsline {section}{\numberline {4.2}Testes realizados e Resultados}{5}
-\contentsline {chapter}{\numberline {5}Conclus\IeC {\~a}o}{6}
-\contentsline {chapter}{\numberline {A}C\IeC {\'o}digo do Programa}{7}
+\contentsline {section}{\numberline {3.2}Estruturas de Dados}{5}
+\contentsline {section}{\numberline {3.3}Exemplos de Programas da Linguagem}{6}
+\contentsline {subsection}{\numberline {3.3.1}Programas com erros sint\IeC {\'a}ticos}{6}
+\contentsline {subsection}{\numberline {3.3.2}Programas com erros sem\IeC {\^a}nticos}{6}
+\contentsline {subsection}{\numberline {3.3.3}Programas correctos}{6}
+\contentsline {chapter}{\numberline {4}Codifica\IeC {\c c}\IeC {\~a}o e Testes}{7}
+\contentsline {section}{\numberline {4.1}Alternativas, Decis\IeC {\~o}es e Problemas de Implementa\IeC {\c c}\IeC {\~a}o}{7}
+\contentsline {section}{\numberline {4.2}Testes realizados e Resultados}{7}
+\contentsline {chapter}{\numberline {5}Conclus\IeC {\~a}o}{8}
+\contentsline {chapter}{\numberline {A}C\IeC {\'o}digo do Programa}{9}

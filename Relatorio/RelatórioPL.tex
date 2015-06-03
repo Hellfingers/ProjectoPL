@@ -5,9 +5,10 @@
 \usepackage[portuges]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{url}
-%\usepackage{alltt}
-%\usepackage{fancyvrb}
+\usepackage{alltt}
+\usepackage{fancyvrb}
 \usepackage{listings}
+
 %LISTING - GENERAL
 \lstset{
 	basicstyle=\small,
@@ -19,32 +20,6 @@
 	mathescape=true,
 	escapeinside={(*@}{@*)}
 }
-%
-%\lstset{ %
-%	language=Java,							% choose the language of the code
-%	basicstyle=\ttfamily\footnotesize,		% the size of the fonts that are used for the code
-%	keywordstyle=\bfseries,					% set the keyword style
-%	%numbers=left,							% where to put the line-numbers
-%	numberstyle=\scriptsize,				% the size of the fonts that are used for the line-numbers
-%	stepnumber=2,							% the step between two line-numbers. If it's 1 each line
-%											% will be numbered
-%	numbersep=5pt,							% how far the line-numbers are from the code
-%	backgroundcolor=\color{white},			% choose the background color. You must add \usepackage{color}
-%	showspaces=false,						% show spaces adding particular underscores
-%	showstringspaces=false,					% underline spaces within strings
-%	showtabs=false,							% show tabs within strings adding particular underscores
-%	frame=none,								% adds a frame around the code
-%	%abovecaptionskip=-.8em,
-%	%belowcaptionskip=.7em,
-%	tabsize=2,								% sets default tabsize to 2 spaces
-%	captionpos=b,							% sets the caption-position to bottom
-%	breaklines=true,						% sets automatic line breaking
-%	breakatwhitespace=false,				% sets if automatic breaks should only happen at whitespace
-%	title=\lstname,							% show the filename of files included with \lstinputlisting;
-%											% also try caption instead of title
-%	escapeinside={\%*}{*)},					% if you want to add a comment within your code
-%	morekeywords={*,...}					% if you want to add more keywords to the set
-%}
 
 \usepackage{xspace}
 
@@ -104,10 +79,88 @@ Os requisitos para o compilador/linguagem a implementar são os seguintes:
 
 \chapter{Concepção/desenho da Resolução} \label{concepcao}
 \section{Gramática}
-Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C.\\
-%GIC
+Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C, tendo pequenas diferenças com a gramática existente no C.\\Abaixo encontra-se a gramática desenhada para a Linguagem:
+
+\begin{verbatim}
+Prog	->	Decls Instrs
+
+Decls	->	InitVar
+      |	Decls InitVar
+		
+InitVar	->	'int' Var Array ';'
+		
+Var		->	id
+
+Array ->
+      |	'[' num ']''
+
+Instrs	->	Instr
+       |	Instrs Instr
+		
+Inst	->	If
+     |	While
+     |	For
+     |	Atr	';'
+     |	IO	';'
+		
+If		->	'if' '(' Cond ')' '{' Instrs '}' Else
+
+Else	->
+     |	'else' '{' Instrs '}'
+		
+While 	-> 	'while' '(' Cond ')' '{' Instrs '}'
+
+For	->	'for' '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
+
+Atr	->	Var Array '='	Exp
+		
+IO	->	'print' Out
+   |	'input' Var
+	
+Out	->	Exp
+    |	'\"' id '\"'
+
+Exp	->	Termo
+    |	Exp OpA	Termo
+		
+Termo	->	Fator
+      |	Termo OpM Fator
+		
+Fator	->	Var Array
+      |	num
+      |	'(' Exp ')'
+      |	'!' Exp
+		
+Comp	->	Exp
+     |	Exp OpConp Exp
+\end{verbatim}
+
 \section{Estruturas de Dados}
-Para realizarmos a análise semântica temos uma tabela de Hash para guardar todos os identificadores de variáveis\ldots
+Para realizarmos a análise semântica temos uma tabela de Hash para guardar todos os identificadores de variáveis e seus tipos de dados. \\A estrutura de dados da tabela de Hash é a seguinte:\\
+\begin{verbatim}
+struct list{
+           char *key;
+           char *type;
+           int init;
+           int ind;
+           int tamanho;
+           struct list* next;};
+
+struct table{
+           int size;
+           int elems;
+           struct list **list;
+};
+\end{verbatim}
+Com a estrutura acima referida podemos então informações sobre uma variável (Identificador, Tipo, Estado de Inicialização, Índice do Registo na Máquina e Tamanho, que será 1 caso se trate de uma variável escalar ou então será o tamanho do vector).
+
+\section{Exemplos de Programas da Linguagem}
+Abaixo irão estar apresentados vários programas, em que os dois primeiros não cumprem os requisitos sintáticos (\ref{esint}) e semânticos (\ref{esem}) da nossa linguagem. Posteriormente iremos apresentar um programa que esteja sintática e semanticamente correcto (\ref{pc}).
+\subsection{Programas com erros sintáticos}\label{esint}
+
+\subsection{Programas com erros semânticos}\label{esem}
+
+\subsection{Programas correctos}\label{pc}
 
 
 \chapter{Codificação e Testes} \label {code}
@@ -115,8 +168,6 @@ Para realizarmos a análise semântica temos uma tabela de Hash para guardar tod
 \section{Testes realizados e Resultados}
 Mostram-se a seguir alguns testes feitos (valores introduzidos) e
 os respectivos resultados obtidos:
-
-%\VerbatimInput{teste1.txt}
 
 
 \chapter{Conclusão} \label {conc}
