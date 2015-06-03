@@ -107,10 +107,11 @@ Else 	:														{
 																	printf("L%d:\n",labelStack[--sp]);
 																}
 		|	ELSE 												{
-																	printf("\tJUMP L%d\n",labelStack[sp--]+1);
-																	printf("L%d:\n",labelStack[sp]);																	
+																	//printf("\tJUMP L%d\n",labelStack[sp-1]);															
+																	printf("\tJUMP L%d\n",countLabel);
+																	printf("L%d:\n",labelStack[--sp]);
 																	labelStack[sp++] = countLabel++;
-
+																	
 																} 
 			'{' Instrs '}'										{
 																	printf("L%d:\n",labelStack[--sp]);
@@ -119,9 +120,7 @@ Else 	:														{
 
 While 	: 	WHILE 			{labelStack[sp++] = countLabel++;printf("L%d:\n",countLabel);}
 			'(' Comp ')' 	{printf("\tJZ L%d\n",labelStack[sp-1]);} 
-			'{' Instrs '}'	{//printf("\tJUMP L%d\nL%d\n",labelStack[sp],labelStack[--sp]);
-								printf("L%d:\n",labelStack[--sp]);
-							}
+			'{' Instrs '}'	{printf("L%d:\n",labelStack[--sp]);}
 		;
 
 For		:	FOR '(' Atr ';' {printf("L%d:\n",countLabel+1);} 
@@ -171,8 +170,8 @@ Termo	:	Fator			{}
 							}
 		;
 
-Fator	:	Var  Array		{ 
-								if(checkSymbol($1))
+Fator	:	Var  Array		{
+ 								if(checkSymbol($1))
 									checkSymbolInit($1);
 
 								printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
