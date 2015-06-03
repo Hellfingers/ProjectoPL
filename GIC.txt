@@ -26,7 +26,7 @@ Else	->
 		
 While 	-> 	'while' '(' Cond ')' '{' Instrs '}'
 
-For		->	'for' '(' Atr ',' Cond ',' Atr ')' '{' Instrs '}'
+For		->	'for' '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
 
 Atr		->	Var Array '='	Exp
 		
