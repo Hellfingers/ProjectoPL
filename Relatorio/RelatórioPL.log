@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.6.2)  2 JUN 2015 18:48
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.6.2)  3 JUN 2015 22:49
 entering extended mode
-**C:/Users/Pedro*Cunha/Documentos/GitHub/ProjectoPL/RelatórioPL.tex
-("C:/Users/Pedro Cunha/Documentos/GitHub/ProjectoPL/RelatórioPL.tex"
+**C:/Users/Pedro*Cunha/Documentos/GitHub/ProjectoPL/Relatorio/RelatórioPL.tex
+("C:/Users/Pedro Cunha/Documentos/GitHub/ProjectoPL/Relatorio/RelatórioPL.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -271,30 +271,46 @@ Now handling font encoding U ...
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-("C:\Users\Pedro Cunha\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.s
-ty" ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\alltt.sty"
+Package: alltt 1997/06/16 v2.0g defines alltt environment
+)
+("C:\Users\Pedro Cunha\AppData\Roaming\MiKTeX\2.9\tex\latex\fancyvrb\fancyvrb.s
+ty"
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz) ("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks16
 )
-\lst@mode=\count89
-\lst@gtempboxa=\box26
+\FV@CodeLineNo=\count89
+\FV@InFile=\read1
+\FV@TabBox=\box26
+\c@FancyVerbLine=\count90
+\FV@StepNumber=\count91
+\FV@OutFile=\write3
+)
+("C:\Users\Pedro Cunha\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.s
+ty"
+\lst@mode=\count92
+\lst@gtempboxa=\box27
 \lst@token=\toks17
-\lst@length=\count90
+\lst@length=\count93
 \lst@currlwidth=\dimen104
-\lst@column=\count91
-\lst@pos=\count92
+\lst@column=\count94
+\lst@pos=\count95
 \lst@lostspace=\dimen105
 \lst@width=\dimen106
-\lst@newlines=\count93
-\lst@lineno=\count94
+\lst@newlines=\count96
+\lst@lineno=\count97
 \lst@maxwidth=\dimen107
 
 ("C:\Users\Pedro Cunha\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstmisc.st
 y"
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
-\c@lstnumber=\count95
-\lst@skipnumbers=\count96
-\lst@framebox=\box27
+\c@lstnumber=\count98
+\lst@skipnumbers=\count99
+\lst@framebox=\box28
 )
 ("C:\Users\Pedro Cunha\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.c
 fg"
@@ -304,38 +320,40 @@ Package: listings 2014/09/06 1.5e (Carsten Heinz)
  ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty"
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\RelatórioPL.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 61.
-LaTeX Font Info:    ... okay on input line 61.
-\c@lstlisting=\count97
+("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\Relatorio\RelatórioPL.aux"
+)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 36.
+LaTeX Font Info:    ... okay on input line 36.
+\c@lstlisting=\count100
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <17.28> on input line 63.
+(Font)              <17.28> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 63.
+(Font)              <12> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 63.
+(Font)              <8> on input line 38.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 63.
+(Font)              <6> on input line 38.
  [1
 
-{C:/Users/Pedro Cunha/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [1]
-("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\RelatórioPL.toc"
+{C:/Users/Pedro Cunha/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+[1]
+("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\Relatorio\RelatórioPL.toc"
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 )
-\tf@toc=\write3
+\tf@toc=\write4
  [1
 
 ]
@@ -344,55 +362,56 @@ Cap\'{\i }tulo 1.
 
 ]
 Cap\'{\i }tulo 2.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 90.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 65.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 90.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
  [3
 
 ]
 Cap\'{\i }tulo 3.
-
-Underfull \hbox (badness 10000) in paragraph at lines 107--109
-
- []
-
 [4
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 139--140
+
+ []
+
+[5] [6]
 Cap\'{\i }tulo 4.
-[5
+[7
 
 ]
 Cap\'{\i }tulo 5.
-[6
+[8
 
 ]
 Ap\^endice A.
-[7
+[9
 
-] ("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\RelatórioPL.aux") ) 
+]
+("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\Relatorio\RelatórioPL.aux"
+) ) 
 Here is how much of TeX's memory you used:
- 2299 strings out of 493921
- 30595 string characters out of 3147265
- 83503 words of memory out of 3000000
- 5608 multiletter control sequences out of 15000+200000
- 9890 words of font info for 35 fonts, out of 3000000 for 9000
+ 2676 strings out of 493921
+ 36619 string characters out of 3147265
+ 93113 words of memory out of 3000000
+ 5978 multiletter control sequences out of 15000+200000
+ 10197 words of font info for 36 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 26i,7n,32p,926b,219s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type
-1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmtt10.pfb>
-Output written on RelatórioPL.pdf (9 pages, 110538 bytes).
+ 26i,7n,32p,936b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmtt10.pfb>
+Output written on RelatórioPL.pdf (11 pages, 119016 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
+ 66 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
