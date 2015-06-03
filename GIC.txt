@@ -3,10 +3,12 @@ Prog	->	Decls Instrs
 Decls	->	InitVar
 		|	Decls InitVar
 		
-InitVar	->	'int' Var ';'
+InitVar	->	'int' Var Array ';'
 		
 Var		->	id
-		|	id '[' Exp ']'
+
+Array	:
+		|	'[' num ']''
 
 Instrs	->	Instr
 		|	Instrs Instr
@@ -17,14 +19,16 @@ Inst	->	If
 		|	Atr	';'
 		|	IO	';'
 		
-If		->	'if' '(' Cond ')' '{' Instrs '}'
-		|	'if' '(' Cond ')' '{' Instrs '}' 'else' '{' Instrs '}'
+If		->	'if' '(' Cond ')' '{' Instrs '}' Else
+
+Else	->
+		|	'else' '{' Instrs '}'
 		
 While 	-> 	'while' '(' Cond ')' '{' Instrs '}'
 
 For		->	'for' '(' Atr ',' Cond ',' Atr ')' '{' Instrs '}'
 
-Atr		->	Var '='	Exp
+Atr		->	Var Array '='	Exp
 		
 IO		->	'print' Out
 		|	'input' Var
@@ -35,28 +39,13 @@ Out		->	Exp
 Exp		->	Termo
 		|	Exp OpA	Termo
 		
-OpA		->	'+'
-		|	'-'
-		|	'&' '&'
-		
 Termo	->	Fator
 		|	Termo OpM Fator
 		
-OpM		->	'*'
-		|	'/'
-		|	'|' '|'
-		
-Fator	->	Var
+Fator	->	Var Array
 		|	num
 		|	'(' Exp ')'
 		|	'!' Exp
 		
 Comp	->	Exp
 		|	Exp OpConp Exp
-
-OpComp	->	'>'
-		|	'<'
-		|	'>='
-		|	'<='
-		|	'=='
-		|	'!='
