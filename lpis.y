@@ -5,6 +5,8 @@
 	#include "hashTable.h"
 
 	int countLabel=1;
+	int labelStack[100], sp=0;
+
 	HashTable symbolTable;
 	char **bloco;
 	int i;
@@ -98,25 +100,29 @@ Instr	:	If 				{}
 		|	IO ';'			{}
 		;
 
-If 		:	IF '(' Comp ')' '{' Instrs '}'	Else
+If 		:	IF '(' Comp ')'{labelStack[sp++] = countLabel++;printf("\tJZ L%d\n",labelStack[sp-1]);} '{' Instrs '}'	Else
 		;
 
-Else 	:														{
-																	printf("L%d:\n",countLabel++);
+Else 	:														{	
+																	printf("L%d:\n",labelStack[--sp]);
 																}
 		|	ELSE 												{
-																	printf("\tJUMP L%d\n",countLabel+1);
-																	printf("L%d:\n",countLabel++);
+																	printf("\tJUMP L%d\n",labelStack[sp--]+1);
+																	printf("L%d:\n",labelStack[sp]);																	
+																	labelStack[sp++] = countLabel++;
+
 																} 
 			'{' Instrs '}'										{
-																	printf("L%d:\n",countLabel++);
+																	printf("L%d:\n",labelStack[--sp]);
 																}
 		;
 
 While 	: 	WHILE {printf("L%d:\n",countLabel+1);}'(' Comp ')' '{' Instrs '}'	{printf("\tJUMP L%d\nL%d:\n",countLabel,countLabel++);}
 		;
 
-For		:	FOR '(' Atr ';' {printf("L%d:\n",countLabel+1);} Comp ';' Atr ')' '{' Instrs '}'		{printf("\tJUMP L%d\nL%d:\n",countLabel,countLabel++);}
+For		:	FOR '(' Atr ';' {printf("L%d:\n",countLabel+1);} 
+			Comp ';' {printf("\tJZ L%d\nL%d:\n",countLabel+1,countLabel+2);} Atr ')' 
+			'{' Instrs '}'		{printf("\tJUMP L%d\nL%d:\n",countLabel,countLabel++);}
 		;
 
 IO		:	PRINT Out		{}
@@ -197,8 +203,6 @@ Comp	:	Exp				{}
 										break;
 
 								}
-								printf("\tJZ L%d\n",countLabel);
-
 							}
 		;
 
