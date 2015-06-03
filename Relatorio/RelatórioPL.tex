@@ -1,0 +1,152 @@
+%
+% Layout retirado de http://www.di.uminho.pt/~prh/curplc09.html#notas
+%
+\documentclass{report}
+\usepackage[portuges]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+%\usepackage{alltt}
+%\usepackage{fancyvrb}
+\usepackage{listings}
+%LISTING - GENERAL
+\lstset{
+	basicstyle=\small,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+    frame=tB,
+	mathescape=true,
+	escapeinside={(*@}{@*)}
+}
+%
+%\lstset{ %
+%	language=Java,							% choose the language of the code
+%	basicstyle=\ttfamily\footnotesize,		% the size of the fonts that are used for the code
+%	keywordstyle=\bfseries,					% set the keyword style
+%	%numbers=left,							% where to put the line-numbers
+%	numberstyle=\scriptsize,				% the size of the fonts that are used for the line-numbers
+%	stepnumber=2,							% the step between two line-numbers. If it's 1 each line
+%											% will be numbered
+%	numbersep=5pt,							% how far the line-numbers are from the code
+%	backgroundcolor=\color{white},			% choose the background color. You must add \usepackage{color}
+%	showspaces=false,						% show spaces adding particular underscores
+%	showstringspaces=false,					% underline spaces within strings
+%	showtabs=false,							% show tabs within strings adding particular underscores
+%	frame=none,								% adds a frame around the code
+%	%abovecaptionskip=-.8em,
+%	%belowcaptionskip=.7em,
+%	tabsize=2,								% sets default tabsize to 2 spaces
+%	captionpos=b,							% sets the caption-position to bottom
+%	breaklines=true,						% sets automatic line breaking
+%	breakatwhitespace=false,				% sets if automatic breaks should only happen at whitespace
+%	title=\lstname,							% show the filename of files included with \lstinputlisting;
+%											% also try caption instead of title
+%	escapeinside={\%*}{*)},					% if you want to add a comment within your code
+%	morekeywords={*,...}					% if you want to add more keywords to the set
+%}
+
+\usepackage{xspace}
+
+\parindent=0pt
+\parskip=2pt
+
+\def\darius{\textsf{Darius}\xspace}
+\def\java{\texttt{Java}\xspace}
+
+\title{Processamento de Linguagens (3º ano de Curso)\\ \textbf{Trabalho Prático 2}\\ Relatório de Desenvolvimento}
+\author{Jorge Miguel Sol Ferreira (a64293) \and Pedro José Freitas da Cunha (a67677) \and José Pedro Brito Pereira (a67680)\\Grupo 35 }
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Este relatório documentará todos os passos tomados na realização do segundo trabalho prático da Unidade Curricular de Processamento de Linguagens.\\ Neste projecto é requerida a implementação de um compilador de uma Linguagem de Programação Imperativa Simples e posteriormente gerador de código assembly para uma máquina de stacks virtual.
+\end {abstract}
+\tableofcontents
+
+\chapter{Introdução} \label{intro}
+
+\begin{description}
+  \item [Enquadramento] Um \textbf{compilador} é uma peça de software que transforma o código fonte numa dada linguagem de alto nível em instruções que a máquina entenda (Código Máquina). As fazes da compilação incluem:\\Análise léxica\\Análise Sintática\\Análise Semântica\\Geração de Código
+  \item [Conteúdo do documento] Neste documento encontrar-se-ão as fases de resolução do problema especificado
+  \item [Resultados -- pontos a evidenciar] O resultado do projecto a desenvolver será um gerador de códigoassembly para uma máquina de stacks virtual, partindo de uma Linguagem de Programação Imperativa Simples.
+\end{description}
+
+
+
+\section*{Estrutura do Relatório} \
+No capítulo \ref{analiseEsp} iremos apresentar o caso de estudo em causa. No capítulo \ref{concepcao} iremos apresentar a estrutura de dados auxiliar à análise semântica e sua utilização no compilador a desenvolver, bem como fazer um esboço do que queremos que seja a nossa linguagem de programação (Gramática Independente do Contexto), para além de alguns exemplos de frases que tenham erros sintáticos, semânticos e frases correctas segundo a nossa especificação. No capítulo \ref{code} iremos apresentar os passos utilizados para geração de código, se possível ou, em alternativa notificaçao de erro sintático. Finalmente, no capítulo \ref{conc} faremos uma apreciação crítica do trabalho realizado e trabalhos futuros. Em anexo iremos colocar o código desenvolvido que permitirá a geração de código máquina.
+
+\chapter{Análise e Especificação} \label{analiseEsp}
+
+\section{Descrição informal do problema}
+Neste projecto é pretendido o desenho de uma Linguagem de Programação Imperativa Simples, para de seguida criar um compilador que gere pseudo-código Assembly de uma Máquina Virtual de Stacks
+\section{Especificação do Requisitos}
+Os requisitos para o compilador/linguagem a implementar são os seguintes:
+\begin{itemize}
+  \item Permitir manusear variáveis do tipo inteiro(escalar ou array).
+  \item Realizar as seguintes operações:
+	\begin{itemize}
+	\item Atribuições de expressões a variáveis.
+	\item Ler do Standard Input.
+	\item Escrever para o Standard Output.
+	\end{itemize}
+ \item Ciclos(for, while) e instruções Condicionais(if..else).
+ \item Operações Aritméticas, Relacionais e Lógicas sobre inteiros.
+ \item Indexação sobre arrays.
+ \item As declarações de variáveis deverão ser no início do programa.
+ \item Não deverá ser possível realizar redeclaraçoes nem utilizações sem declaraçao prévia.
+ \item Se não existirem atribuições a uma variável, o valor da mesma deverá ser indefinido
+\end{itemize}
+
+\chapter{Concepção/desenho da Resolução} \label{concepcao}
+\section{Gramática}
+Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C.\\
+%GIC
+\section{Estruturas de Dados}
+Para realizarmos a análise semântica temos uma tabela de Hash para guardar todos os identificadores de variáveis\ldots
+
+
+\chapter{Codificação e Testes} \label {code}
+\section{Alternativas, Decisões e Problemas de Implementação}
+\section{Testes realizados e Resultados}
+Mostram-se a seguir alguns testes feitos (valores introduzidos) e
+os respectivos resultados obtidos:
+
+%\VerbatimInput{teste1.txt}
+
+
+\chapter{Conclusão} \label {conc}
+Síntese do Documento.\\
+Estado final do projecto; Análise crítica dos resultados.\\
+Trabalho futuro.
+
+\appendix
+\chapter{Código do Programa}
+
+
+\begin{verbatim}
+      aqui deve aparecer o código do programa,
+      tal como está formato no ficheiro-fonte "darius.java"
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document} 
