@@ -1,11 +1,18 @@
 int a;
-int b[2];
-int basfdaw;
+int b;
 
-a = 2+2;
+a = 2;
+b=3;
 
-if(a>4){a=2;}
+b = a + 3 - 2;
 
-while(a<=4){a=3;}
+if(a<2){
+	if(b>3){
+		a=2;
+	}
 
-for(a=2;a;a=4){a=2;}
+	if(b<5){
+		b=4;
+	}
+	b = 4;
+}

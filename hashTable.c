@@ -6,11 +6,14 @@ struct list{
 	char *key;
 	char *type;
 	int init;
+	int ind;
+	int tamanho;
 	struct list* next;
 };
 
 struct table{
 	int size;
+	int elems;
 	struct list **list;
 };
 
@@ -32,15 +35,17 @@ struct table* hashCreate(int size){
 }
 
 unsigned long hash(unsigned char *str){
-	unsigned long hash = 0;
+
+	unsigned long hash = 5381;
     int c;
 
 	while (c = *str++)
-		hash = ((hash << 5) + hash) + c;
+    	hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+		
 	return hash;
 }
 
-int hashInsert(struct table* t, char* key, char* type){
+int hashInsert(struct table* t, char* key, char* type, int ind){
 
 	struct list *aux;
 	long h;
@@ -48,18 +53,22 @@ int hashInsert(struct table* t, char* key, char* type){
 	if(hashContains(t,key))
 		return 0;
 
-	aux = malloc(sizeof(struct list *));
+	aux = malloc(sizeof(struct list *) * 4);
 
 	aux->key = strdup(key);
 	aux->type = strdup(type);
 	aux->init = 0;
+	aux->ind = t->elems;
+	aux->tamanho = ind;
+
+	t->elems++;
 
 	h = hash(key) % t->size;
+
 	aux->next = t->list[h];
 	t->list[h] = aux;
 
 	return 1;
-
 }
 
 int hashContains(struct table* t, char* key){
@@ -67,9 +76,10 @@ int hashContains(struct table* t, char* key){
 	struct list* aux;
 	int h=hash(key)%t->size;
 
-	for(aux = t->list[h];aux!=NULL;aux = aux->next)
+	for(aux = t->list[h];aux!=NULL;aux = aux->next){
 		if(strcmp(aux->key,key) == 0)
 			return 1;
+	}
 
 	return 0;
 }
@@ -102,4 +112,18 @@ int hashInit(struct table* t, char* key){
 
 	return 1;
 
+}
+
+int hashInd(struct table* t, char* key){
+
+
+	struct list* aux;
+	int h=hash(key)%t->size;
+
+	if(!hashContains(t,key))
+		return 0;
+
+	for(aux = t->list[h];aux != NULL;aux = aux->next)
+		if(strcmp(key,aux->key) == 0)
+			return aux->ind;
 }

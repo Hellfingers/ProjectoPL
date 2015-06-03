@@ -1,14 +1,19 @@
 %{
 	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
 	#include "hashTable.h"
 
+	int countLabel=1;
 	HashTable symbolTable;
+	char **bloco;
+	int i;
 
-	void insertSymbol(char* symb, char* type){
+	void insertSymbol(char* symb, char* type, int tamanho){
 
 		int res;
 
-		res = hashInsert(symbolTable, symb, type);
+		res = hashInsert(symbolTable, symb, type, tamanho);
 
 		if(res == 0)
 			printf("Variável '%s' já definida.\n",symb);
@@ -39,7 +44,6 @@
 	void initSymbol(char* symb){
 
 		hashInit(symbolTable, symb);
-
 	}
 
 %}
@@ -47,103 +51,155 @@
 %union {
 	int vali;
 	char* valc;
+	char valOp;
 }
 
 %token INT IF ELSE WHILE FOR PRINT INPUT
 
-%token <valc> id
+%token <valc> id OpComp
 %token <vali> num
+%token <valOp> OpA OpM
 
-%type <valc> Var
+%type <valc> Var 
+%type <vali> Exp Termo Fator Array
 
 %%
 
-Prog	:	Decls Instrs	{}
+Prog	:	Declss Instrs	{printf("\tSTOP\n");}
 		;
+
+Declss	:	Decls 			{printf("\tSTART\n");}
 
 Decls	:	InitVar			{}
 		|	Decls InitVar	{}
 		;
 
-InitVar	:	INT Var ';'		{insertSymbol($2,"int");}
+InitVar	:	INT Var Array ';'		{
+										insertSymbol($2,"int",$3);
+										printf("\tPUSHI 0\n");
+									}
+		;
+
+Array	:					{$$ = 1;}
+		|	'[' num ']'		{$$ = $2;}
 		;
 
 Var		:	id				{$$ = $1;}
-		|	id '[' num ']'	{}
 		;
 
 Instrs	:	Instr 			{}
 		|	Instrs Instr 	{}
 		;	
 
-Instr	:					{}
-		|	If 				{}
+Instr	:	If 				{}
 		|	While 			{}
 		|	For 			{}
 		|	Atr	';'			{}
 		|	IO ';'			{}
 		;
 
-If 		:	IF '(' Comp ')' '{' Instrs '}'						{}
+If 		:	IF '(' Comp ')' '{' Instrs '}'	Else
 		;
 
-While 	: 	WHILE '(' Comp ')' '{' Instrs '}'						{}
+Else 	:														{
+																	printf("L%d:\n",countLabel++);
+																}
+		|	ELSE 												{
+																	printf("\tJUMP L%d\n",countLabel+1);
+																	printf("L%d:\n",countLabel++);
+																} 
+			'{' Instrs '}'										{
+																	printf("L%d:\n",countLabel++);
+																}
 		;
 
-For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'		{}
+While 	: 	WHILE {printf("L%d:\n",countLabel+1);}'(' Comp ')' '{' Instrs '}'	{printf("\tJUMP L%d\nL%d:\n",countLabel,countLabel++);}
+		;
+
+For		:	FOR '(' Atr ';' {printf("L%d:\n",countLabel+1);} Comp ';' Atr ')' '{' Instrs '}'		{printf("\tJUMP L%d\nL%d:\n",countLabel,countLabel++);}
 		;
 
 IO		:	PRINT Out		{}
-		|	INPUT Var 		{}
+		|	INPUT Var Array	{}
 		;
 
 Out		:	Exp				{}
 		|	'\"' id '\"'	{}
 		;
 
-Atr		:	Var '='	Exp		{
-								if(checkSymbol($1))
+Atr		:	Var Array '='	Exp		{
+								if(checkSymbol($1)){
 									initSymbol($1);
+									//printf("PUSHI %d\n", $3);
+									printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+								}
 							}
 		;
 
 Exp		:	Termo			{}
-		|	Exp OpA	Termo	{}
+		|	Exp OpA	Termo	{
+								switch($2){
+
+									case '+': printf("\tADD\n");
+											break;
+									case '-': printf("\tSUB\n");
+											break;
+								}
+							}
 		;
 
-OpA		:	'+'				{}
-		|	'-'				{}
-		|	'&' '&'			{}
-		;
 
 Termo	:	Fator			{}
-		|	Termo OpM Fator	{}
+		|	Termo OpM Fator	{
+								switch($2){	
+
+									case '/': printf("\tDIV\n");
+											break;
+									case '*': printf("\tMUL\n");
+											break;
+								}
+							}
 		;
 
-OpM		:	'*'				{}
-		|	'/'				{}
-		|	'|' '|'			{}
-		;
-
-Fator	:	Var 			{
+Fator	:	Var  Array		{ 
 								if(checkSymbol($1))
 									checkSymbolInit($1);
+
+								printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
 							}
-		|	num				{}
+		|	num				{ printf("\tPUSHI %d\n", $1);}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
 		;
 
 Comp	:	Exp				{}
-		|	Exp OpComp Exp	{}
-		;
+		|	Exp OpComp Exp	{
+								switch($2[0]){
 
-OpComp	:	'>'
-		|	'<'
-		|	'<''='
-		|	'>''='
-		|	'=''='
-		|	'!''='
+									case '>':
+										if($2[1] == '='){
+											printf("\tSUPEQ\n");
+										}
+										else{
+											printf("\tSUP\n");
+										}
+										break;
+									case '<':
+										if($2[1] == '='){
+											printf("\tINFEQ\n");
+										}
+										else{
+											printf("\tINF\n");
+										}
+										break;
+									case '=':
+										printf("\tEQUAL\n");
+										break;
+
+								}
+								printf("\tJZ L%d\n",countLabel);
+
+							}
 		;
 
 %%
@@ -157,6 +213,7 @@ int yyerror(char *s){
 int main(){
 
 	symbolTable = hashCreate(1000);
+	bloco = malloc(sizeof(char*)*1000);
 	yyparse(); 
 	return 0; 
 }	

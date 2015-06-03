@@ -8,12 +8,20 @@ pal [a-zA-Z]+
 
 %%
 
+\/\/.*			{
+					;
+				}
+
 "int"	     	{ 
 					return INT; 
 				}
 
 "if"			{
 					return IF;
+				}
+
+"else"			{
+					return ELSE;
 				}
 
 "while"			{
@@ -32,9 +40,24 @@ pal [a-zA-Z]+
 					return INPUT;
 				}
 
-[<>()\{\}\[\];=+*\/]    {
-					return yytext[0]; 
-				}
+[+-]				{
+						yylval.valOp = yytext[0];
+						return OpA;
+					}
+
+[*\/]				{
+						yylval.valOp = yytext[0];
+						return OpM;
+					}	
+
+(([<>][=]?)|"==")	{
+						yylval.valc = strdup(yytext);
+						return OpComp;
+					}					
+
+[<>\(\)\{\}\[\];=!]		{
+							return yytext[0]; 
+						}
 
 {pal}			{ 
 					yylval.valc = strdup(yytext);
@@ -45,7 +68,6 @@ pal [a-zA-Z]+
 					yylval.vali = atoi(yytext);
 					return num;
 				}
-
 
 .|\n      		{ 
 					; 
