@@ -79,7 +79,7 @@ Os requisitos para o compilador/linguagem a implementar são os seguintes:
 
 \chapter{Concepção/desenho da Resolução} \label{concepcao}
 \section{Gramática}
-Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C, tendo pequenas diferenças com a gramática existente no C.\\Abaixo encontra-se a gramática desenhada para a Linguagem:
+Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C, funcionando como uma versão simplificada do C.\\Abaixo encontra-se a gramática desenhada para a Linguagem:
 
 \begin{verbatim}
 Prog	->	Decls Instrs
@@ -157,9 +157,19 @@ Com a estrutura acima referida podemos então informações sobre uma variável 
 \section{Exemplos de Programas da Linguagem}
 Abaixo irão estar apresentados vários programas, em que os dois primeiros não cumprem os requisitos sintáticos (\ref{esint}) e semânticos (\ref{esem}) da nossa linguagem. Posteriormente iremos apresentar um programa que esteja sintática e semanticamente correcto (\ref{pc}).
 \subsection{Programas com erros sintáticos}\label{esint}
-
+Programa 1:\\
+O programa abaixo quebra uma das regras estipuladas para a Linguagem de Programação: "As declarações de variáveis deverão ser no início do programa."
+\begin{verbatim}
+int a;
+int b;
+for(b=0;b<10;b=b+1)
+     int c=b;
+print a;
+\end{verbatim}
 \subsection{Programas com erros semânticos}\label{esem}
+\begin{verbatim}
 
+\end{verbatim}
 \subsection{Programas correctos}\label{pc}
 
 
