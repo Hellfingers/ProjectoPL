@@ -107,7 +107,6 @@ Else 	:														{
 																	printf("L%d:\n",labelStack[--sp]);
 																}
 		|	ELSE 												{
-																	//printf("\tJUMP L%d\n",labelStack[sp-1]);															
 																	printf("\tJUMP L%d\n",countLabel);
 																	printf("L%d:\n",labelStack[--sp]);
 																	labelStack[sp++] = countLabel++;
@@ -118,14 +117,38 @@ Else 	:														{
 																}
 		;
 
-While 	: 	WHILE 			{labelStack[sp++] = countLabel++;printf("L%d:\n",countLabel);}
-			'(' Comp ')' 	{printf("\tJZ L%d\n",labelStack[sp-1]);} 
-			'{' Instrs '}'	{printf("L%d:\n",labelStack[--sp]);}
+While 	: 	WHILE 			{
+								labelStack[sp++] = countLabel++;
+								printf("L%d:\n",countLabel);
+							}
+			'(' Comp ')' 	{
+								printf("\tJZ L%d\n",labelStack[sp-1]);
+								labelStack[sp++] = countLabel++;
+							}
+			'{' Instrs '}'	{
+								printf("\tJUMP L%d\n",labelStack[--sp]);
+								printf("L%d:\n",labelStack[--sp]);
+							}
 		;
 
-For		:	FOR '(' Atr ';' {printf("L%d:\n",countLabel+1);} 
-			Comp ';' {printf("\tJZ L%d\nL%d:\n",countLabel+1,countLabel+2);} Atr ')' 
-			'{' Instrs '}'		{printf("\tJUMP L%d\nL%d:\n",countLabel,countLabel++);}
+For		:	FOR '(' Atr ';' {
+								labelStack[sp++] = countLabel++;
+								printf("L%d:\n",countLabel);
+							}
+			Comp ';' 		{
+								printf("\tJZ L%d\n",labelStack[sp-1]);
+								printf("\tJUMP L%d\n",countLabel+2);
+								labelStack[sp++] = countLabel++;
+								printf("L%d:\n",countLabel++);
+							}
+			Atr ')' 		{	
+								printf("\tJUMP L%d\n", countLabel-2);
+								printf("L%d:\n",countLabel++);
+							}
+			'{' Instrs '}'	{
+								printf("\tJUMP L%d\n",labelStack[--sp]+1);
+								printf("L%d:\n",labelStack[--sp]);
+							}
 		;
 
 IO		:	PRINT Out		{}
