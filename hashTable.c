@@ -116,7 +116,6 @@ int hashInit(struct table* t, char* key){
 
 int hashInd(struct table* t, char* key){
 
-
 	struct list* aux;
 	int h=hash(key)%t->size;
 
@@ -126,4 +125,18 @@ int hashInd(struct table* t, char* key){
 	for(aux = t->list[h];aux != NULL;aux = aux->next)
 		if(strcmp(key,aux->key) == 0)
 			return aux->ind;
+}
+
+char* hashType(struct table *t, char *key){
+
+	struct list* aux;
+	int h=hash(key)%t->size;
+
+	if(!hashContains(t,key))
+		return 0;
+
+	for(aux = t->list[h];aux != NULL;aux = aux->next)
+		if(strcmp(key,aux->key) == 0)
+			return aux->type;
+
 }

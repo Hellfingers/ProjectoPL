@@ -16,6 +16,10 @@ pal [a-zA-Z]+
 					return INT; 
 				}
 
+"string"     	{ 
+					return STRING; 
+				}
+
 "if"			{
 					return IF;
 				}
@@ -48,16 +52,18 @@ pal [a-zA-Z]+
 [*\/]				{
 						yylval.valOp = yytext[0];
 						return OpM;
-					}	
+					}
 
-(([<>][=]?)|"==")	{
-						yylval.valc = strdup(yytext);
-						return OpComp;
-					}					
+\".*\"				{yylval.valc = strdup(yytext);return str;}					
 
-[<>\(\)\{\}\[\];=!]		{
-							return yytext[0]; 
-						}
+(([<>][=]?)|"=="|"!=")		{
+								yylval.valc = strdup(yytext);
+								return OpComp;
+							}					
+
+([<>\(\)\{\}\[\];=!&]|"|")		{
+								return yytext[0]; 
+							}
 
 {pal}			{ 
 					yylval.valc = strdup(yytext);
