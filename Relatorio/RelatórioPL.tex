@@ -167,11 +167,45 @@ for(b=0;b<10;b=b+1)
 print a;
 \end{verbatim}
 \subsection{Programas com erros semânticos}\label{esem}
-\begin{verbatim}
+Programa 1:\\
+O programa que se segue quebra uma das especificações da linguagem: " Não deverá ser possível utilizações de variáveis sem declaração prévia."
 
+\begin{verbatim}
+int a;
+int b;
+for(a=0;a<10;a=a+1)
+      for(b=10;b>0;b=b-1)
+            c=c+a+b;
+print a;
 \end{verbatim}
 \subsection{Programas correctos}\label{pc}
-
+Programa 1:\\
+O programa abaixo segue as regras sintáticas e semânticas:
+\begin{verbatim}
+int n;
+int first;
+int second;
+int next;
+int i;
+ 
+first=0;
+second=1;
+ 
+print "Insira o numero de termos";
+input n;
+ 
+for(i=0;i<n;i=i+1){
+        if(i<=1){
+                next=i;
+        }
+        else{
+                next = first + second;
+                first = second;
+                second = next;
+        }
+        print next;
+}
+\end{verbatim}
 
 \chapter{Codificação e Testes} \label {code}
 \section{Alternativas, Decisões e Problemas de Implementação}
