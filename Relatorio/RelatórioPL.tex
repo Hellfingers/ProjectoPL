@@ -284,17 +284,17 @@ Para aprimorar os resultados obtidos neste projecto os seguntes pontos deverão 
 \chapter{Código do Programa}
 Código do Analisador Léxico para reconhecer os símbolos terminais:
 \begin{verbatim}
-\%{
+%{
 	#include <stdlib.h>
-\%}
-\%x COMENTARIO
+%}
+%x COMENTARIO
 
-\%option yylineno
+%option yylineno
 
 num [0-9]+
 pal [a-zA-Z]+
 
-\%\%
+%%
 
 \/\/.*			{
 					;
@@ -337,7 +337,7 @@ pal [a-zA-Z]+
 						return OpA;
 					}
 
-[*\/\%]				{
+[*\/%]				{
 						yylval.valOp = yytext[0];
 						return OpM;
 					}
@@ -367,7 +367,7 @@ pal [a-zA-Z]+
 					; 
 				}
 
-\%\%
+%%
 
 int yywrap()
     { return(1); }
@@ -376,7 +376,7 @@ int yywrap()
 
 Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máquina:
 \begin{verbatim}
-\%{
+%{
 	#include <stdio.h>
 	#include <stdlib.h>
 	#include <string.h>
@@ -398,7 +398,7 @@ Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máqui
 		res = hashInsert(symbolTable, symb, type, tamanho);
 
 		if(res == 0){
-			sprintf(aux,"Variável '\%s' já definida.",symb);
+			sprintf(aux,"Variável '%s' já definida.",symb);
 			yyerror(aux);
 		}
 	}
@@ -411,7 +411,7 @@ Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máqui
 		res = hashContains(symbolTable, symb);
 
 		if(res == 0){
-			sprintf(aux,"Variável '\%s' não definida.",symb);
+			sprintf(aux,"Variável '%s' não definida.",symb);
 			yyerror(aux);
 		}
 		return res;
@@ -437,7 +437,7 @@ Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máqui
 
 		res = hashIsInit(symbolTable, symb);
 
-	//	printf("Warning linha \%d: Variável '\%s' não inicializada!\n",symb);
+	//	printf("Warning linha %d: Variável '%s' não inicializada!\n",symb);
 	}
 
 	void initSymbol(char* symb){
@@ -445,24 +445,24 @@ Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máqui
 		hashInit(symbolTable, symb);
 	}
 
-\%}
+%}
 
-\%union {
+%union {
 	int vali;
 	char* valc;
 	char valOp;
 }
 
-\%token STRING INT IF ELSE WHILE FOR PRINT INPUT 
+%token STRING INT IF ELSE WHILE FOR PRINT INPUT 
 
-\%token <valc> id OpComp str
-\%token <vali> num
-\%token <valOp> OpA OpM
+%token <valc> id OpComp str
+%token <vali> num
+%token <valOp> OpA OpM
 
-\%type <valc> Var
-\%type <vali> Exp Termo Fator
+%type <valc> Var
+%type <vali> Exp Termo Fator
 
-\%\%
+%%
 
 Prog	:	Declss Instrs	{fprintf(f,"\tSTOP\n");}
 		;
@@ -475,7 +475,7 @@ Decls	:	InitVar			{}
 
 InitVar	:	INT Var '[' num ']' ';'	{
 										insertSymbol($2,"arrayint",$4);
-										fprintf(f,"\tPUSHN \%d\n", $4);
+										fprintf(f,"\tPUSHN %d\n", $4);
 									}
 										
 		|	INT Var ';'				{
@@ -505,55 +505,55 @@ Instr	:	If 				{}
 
 If 		:	IF '(' Cond ')'	{
 								labelStack[sp++] = countLabel++;
-								fprintf(f,"\tJZ L\%d\n",labelStack[sp-1]);
+								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
 							}
 			'{' Instrs '}'	Else
 		;
 
 Else 	:					{	
-								fprintf(f,"L\%d:\n",labelStack[--sp]);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 							}
 		|	ELSE 			{
-								fprintf(f,"\tJUMP L\%d\n",countLabel);
-								fprintf(f,"L\%d:\n",labelStack[--sp]);
+								fprintf(f,"\tJUMP L%d\n",countLabel);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 								labelStack[sp++] = countLabel++;
 							} 
 			'{' Instrs '}'	{
-								fprintf(f,"L\%d:\n",labelStack[--sp]);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 								}
 		;
 
 While 	: 	WHILE 			{
 								labelStack[sp++] = countLabel++;
-								fprintf(f,"L\%d:\n",countLabel);
+								fprintf(f,"L%d:\n",countLabel);
 							}
 			'(' Cond ')' 	{
-								fprintf(f,"\tJZ L\%d\n",labelStack[sp-1]);
+								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
 								labelStack[sp++] = countLabel++;
 							}
 			'{' Instrs '}'	{
-								fprintf(f,"\tJUMP L\%d\n",labelStack[--sp]);
-								fprintf(f,"L\%d:\n",labelStack[--sp]);
+								fprintf(f,"\tJUMP L%d\n",labelStack[--sp]);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 							}
 		;
 
 For		:	FOR '(' Atr ';' {
 								labelStack[sp++] = countLabel++;
-								fprintf(f,"L\%d:\n",countLabel);
+								fprintf(f,"L%d:\n",countLabel);
 							}
 			Cond ';' 		{
-								fprintf(f,"\tJZ L\%d\n",labelStack[sp-1]);
-								fprintf(f,"\tJUMP L\%d\n",countLabel+2);
+								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
+								fprintf(f,"\tJUMP L%d\n",countLabel+2);
 								labelStack[sp++] = countLabel++;
-								fprintf(f,"L\%d:\n",countLabel++);
+								fprintf(f,"L%d:\n",countLabel++);
 							}
 			Atr ')' 		{	
-								fprintf(f,"\tJUMP L\%d\n", countLabel-2);
-								fprintf(f,"L\%d:\n",countLabel++);
+								fprintf(f,"\tJUMP L%d\n", countLabel-2);
+								fprintf(f,"L%d:\n",countLabel++);
 							}
 			'{' Instrs '}'	{
-								fprintf(f,"\tJUMP L\%d\n",labelStack[--sp]+1);
-								fprintf(f,"L\%d:\n",labelStack[--sp]);
+								fprintf(f,"\tJUMP L%d\n",labelStack[--sp]+1);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 							}
 		;
 
@@ -561,7 +561,7 @@ IO		:	PRINT Out		{}
 		|	INPUT Var 		{
 								fprintf(f,"\tREAD\n");
 								fprintf(f,"\tATOI\n");
-								fprintf(f,"\tSTOREG \%d\n", hashInd(symbolTable,$2));
+								fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$2));
 							}
 		;
 
@@ -575,7 +575,7 @@ Out		:	Exp				{
 							}
 
 		|	str				{
-								fprintf(f,"\tPUSHS \%s\n",$1);
+								fprintf(f,"\tPUSHS %s\n",$1);
 								fprintf(f,"\tWRITES\n");
 							}
 		;
@@ -587,7 +587,7 @@ Atr		:	Var '=' Exp	{
 										if($3==1){
 											if(checkSymbol($1)){
 												initSymbol($1);
-												fprintf(f,"\tSTOREG \%d\n", hashInd(symbolTable,$1));	
+												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
 										else{
@@ -598,7 +598,7 @@ Atr		:	Var '=' Exp	{
 										if($3==2){
 											if(checkSymbol($1)){
 												initSymbol($1);
-												fprintf(f,"\tSTOREG \%d\n", hashInd(symbolTable,$1));	
+												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
 										else{
@@ -617,7 +617,7 @@ Atr		:	Var '=' Exp	{
 										}
 									}
 									else if(strcmp(checkType($1),"ND")==0){
-										sprintf(aux,"Variável '\%s' não definida.",$1);
+										sprintf(aux,"Variável '%s' não definida.",$1);
 										yyerror(aux);
 									}
 								}
@@ -627,7 +627,7 @@ Atr		:	Var '=' Exp	{
 						}
 		|	Var '[' Exp ']' '=' Exp {	
 										if(strcmp(checkType($1),"arrayint")==0){
-											fprintf(f,"\tPUSHG \%d\n", hashInd(symbolTable,$1));
+											fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 											fprintf(f,"\tSTOREN\n");
 										}
 										else{
@@ -678,7 +678,7 @@ Termo	:	Fator			{$$ = $1;}
 										case '*': 
 											fprintf(f,"\tMUL\n");
 											break;
-										case '\%': 
+										case '%': 
 											fprintf(f,"\tMOD\n");
 											break;
 										case '&':
@@ -698,11 +698,11 @@ Fator	:	Var		{
 
 								if(strcmp(checkType($1),"int")==0){
 									$$=1;
-									fprintf(f,"\tPUSHG \%d\n", hashInd(symbolTable,$1));
+									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 								}
 								else if(strcmp(checkType($1),"string")==0){
 									$$=2;
-									fprintf(f,"\tPUSHG \%d\n", hashInd(symbolTable,$1));
+									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 								}
 								else{
 								}
@@ -711,16 +711,16 @@ Fator	:	Var		{
 		|	Var '[' Exp ']' 	{
 									if(strcmp(checkType($1),"arrayint")==0){
 										$$=1;
-										printf("\%s\n",checkType($1));
-										fprintf(f,"\tPUSHG \%d\n", hashInd(symbolTable,$1));
+										printf("%s\n",checkType($1));
+										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 										fprintf(f,"\tLOADN\n");
 									}
 									else{
 										yyerror("Tipos diferentes");
 									}
 								}
-		|	num				{$$ = 1; fprintf(f,"\tPUSHI \%d\n", $1);}
-		|	str 			{$$ = 2; fprintf(f,"\tPUSHS \%s\n", $1);}
+		|	num				{$$ = 1; fprintf(f,"\tPUSHI %d\n", $1);}
+		|	str 			{$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
 		;
@@ -767,12 +767,12 @@ Comp	:	Exp				{}
 							}
 		;
 
-\%\%
+%%
 
 #include "lex.yy.c"
 
 int yyerror(char *s){
-	printf("Erro Sintático linha \%d: \%s\n",yylineno, s);
+	printf("Erro Sintático linha %d: %s\n",yylineno, s);
 }
      
 int main(){
