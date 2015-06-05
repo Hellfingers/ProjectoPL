@@ -33,6 +33,17 @@
 		return res;
 	}
 
+	char* checkType(char* symb){
+		int res;
+
+		res = hashContains(symbolTable, symb);
+
+		if(res == 0)
+			printf("Variável '%s' não definida.\n",symb);
+
+		return hashType(symbolTable,symb);
+	}
+
 	void checkSymbolInit(char* symb){
 
 		int res;
@@ -56,13 +67,13 @@
 	char valOp;
 }
 
-%token INT IF ELSE WHILE FOR PRINT INPUT
+%token STRING INT IF ELSE WHILE FOR PRINT INPUT 
 
-%token <valc> id OpComp
+%token <valc> id OpComp str
 %token <vali> num
 %token <valOp> OpA OpM
 
-%type <valc> Var 
+%type <valc> Var
 %type <vali> Exp Termo Fator Array
 
 %%
@@ -80,10 +91,14 @@ InitVar	:	INT Var Array ';'		{
 										insertSymbol($2,"int",$3);
 										printf("\tPUSHI 0\n");
 									}
+		|	STRING Var ';'			{
+										insertSymbol($2,"string",0);
+										printf("\tPUSHS \"\"\n");
+									}
 		;
 
 Array	:					{$$ = 1;}
-		|	'[' num ']'		{$$ = $2;}
+		|	'[' Exp ']'		{$$ = $2;}
 		;
 
 Var		:	id				{$$ = $1;}
@@ -155,16 +170,41 @@ IO		:	PRINT Out		{}
 		|	INPUT Var Array	{}
 		;
 
-Out		:	Exp				{}
-		|	'\"' id '\"'	{}
+Out		:	Exp				{printf("\tWRITEI\n");}
+		|	str				{printf("\tPUSHS %s\n",$1);printf("\tWRITES\n");}
 		;
 
-Atr		:	Var Array '='	Exp		{
-								if(checkSymbol($1)){
-									initSymbol($1);
-									//printf("PUSHI %d\n", $3);
-									printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+Atr		:	Var '=' Exp			{
+									if(checkSymbol($1)){
+										initSymbol($1);
+										printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+									}
+
+									if($3 == 1){
+
+									}
+									else{
+
+									}
 								}
+		|	Var Array '=' Exp			{
+									if(checkSymbol($1)){
+										initSymbol($1);
+										printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+									}
+
+									if($2 == 1){
+
+									}
+									else{
+
+									}
+								}
+		|	Var '=' str		{
+								if(strcmp(checkType($1),"string")==0){
+									printf("\tPUSHS %s\n",$3);
+								}
+
 							}
 		;
 
@@ -172,10 +212,14 @@ Exp		:	Termo			{}
 		|	Exp OpA	Termo	{
 								switch($2){
 
-									case '+': printf("\tADD\n");
-											break;
-									case '-': printf("\tSUB\n");
-											break;
+									case '+': 
+										printf("\tADD\n");
+										break;
+									case '-': 
+										printf("\tSUB\n");
+										break;
+									case '|':
+										printf("\tADD\n");
 								}
 							}
 		;
@@ -185,10 +229,14 @@ Termo	:	Fator			{}
 		|	Termo OpM Fator	{
 								switch($2){	
 
-									case '/': printf("\tDIV\n");
-											break;
-									case '*': printf("\tMUL\n");
-											break;
+									case '/': 
+										printf("\tDIV\n");
+										break;
+									case '*': 
+										printf("\tMUL\n");
+										break;
+									case '&':
+										printf("\tMUL\n");
 								}
 							}
 		;
@@ -226,6 +274,10 @@ Comp	:	Exp				{}
 										break;
 									case '=':
 										printf("\tEQUAL\n");
+										break;
+									case '!':
+										printf("\tEQUAL\n");
+										printf("\tNOT\n");
 										break;
 
 								}
