@@ -3,6 +3,8 @@
 %}
 %x COMENTARIO
 
+%option yylineno
+
 num [0-9]+
 pal [a-zA-Z]+
 

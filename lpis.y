@@ -14,34 +14,42 @@
 	void insertSymbol(char* symb, char* type, int tamanho){
 
 		int res;
+		char aux[1000];
 
 		res = hashInsert(symbolTable, symb, type, tamanho);
 
-		if(res == 0)
-			printf("Variável '%s' já definida.\n",symb);
+		if(res == 0){
+			sprintf(aux,"Variável '%s' já definida.",symb);
+			yyerror(aux);
+		}
 	}
 
 	int checkSymbol(char* symb){
 
 		int res;
+		char aux[1000];
 
 		res = hashContains(symbolTable, symb);
 
-		if(res == 0)
-			printf("Variável '%s' não definida.\n",symb);
-
+		if(res == 0){
+			sprintf(aux,"Variável '%s' não definida.",symb);
+			yyerror(aux);
+		}
 		return res;
 	}
 
 	char* checkType(char* symb){
+		
 		int res;
 
 		res = hashContains(symbolTable, symb);
 
-		if(res == 0)
-			printf("Variável '%s' não definida.\n",symb);
-
-		return hashType(symbolTable,symb);
+		if(res == 0){
+			return "erro";
+		}
+		else{
+			return hashType(symbolTable,symb);
+		}
 	}
 
 	void checkSymbolInit(char* symb){
@@ -176,7 +184,7 @@ Out		:	Exp				{
 		;
 
 Atr		:	Var '=' Exp			{
-
+									char aux[1000];
 									if(strcmp(checkType($1),"int")==0){
 										if($3==1){
 											if(checkSymbol($1)){
@@ -199,6 +207,10 @@ Atr		:	Var '=' Exp			{
 											yyerror("Tipos diferentes");
 										}
 									}
+									else if(strcmp(checkType($1),"erro")==0){
+										sprintf(aux,"Variável '%s' não definida.",$1);
+										yyerror(aux);
+									}
 								}
 		|	Var Array '=' Exp			{
 									if(checkSymbol($1)){
@@ -218,9 +230,7 @@ Atr		:	Var '=' Exp			{
 Exp		:	Termo			{}
 		|	Exp OpA	Termo	{
 								if($1 == 1 && $3 == 1){
-									printf("%d,%d\n",$1,$3);
 									switch($2){
-
 										case '+': 
 											printf("\tADD\n");
 											break;
@@ -240,7 +250,6 @@ Exp		:	Termo			{}
 										default:
 											yyerror("Tipos diferentes");
 											break;
-
 									}
 								}
 								else{
@@ -249,11 +258,9 @@ Exp		:	Termo			{}
 							}
 		;
 
-
 Termo	:	Fator			{$$ = $1;}
 		|	Termo OpM Fator	{
 								if($1 == 1 && $3 == 1){
-									printf("%d,%d\n",$1,$3);
 									switch($2){	
 
 										case '/': 
@@ -282,11 +289,14 @@ Fator	:	Var  Array		{
 
 								if(strcmp(checkType($1),"int")==0){
 									$$=1;
-								}
-								else{
-									$$=2;
-								}
 									printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
+								}
+								else if(strcmp(checkType($1),"string")==0){
+									$$=2;
+									printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
+								}
+								else {
+								}
 
 							}
 		|	num				{$$ = 1; printf("\tPUSHI %d\n", $1);}
@@ -332,7 +342,7 @@ Comp	:	Exp				{}
 #include "lex.yy.c"
 
 int yyerror(char *s){
-	printf("erro sintático: %s\n", s);
+	printf("Erro Sintático linha %d: %s\n",yylineno, s);
 }
      
 int main(){
