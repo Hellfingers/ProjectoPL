@@ -149,7 +149,7 @@ While 	: 	WHILE 			{
 								labelStack[sp++] = countLabel++;
 								fprintf(f,"L%d:\n",countLabel);
 							}
-			'(' Comp ')' 	{
+			'(' Cond ')' 	{
 								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
 								labelStack[sp++] = countLabel++;
 							}
@@ -163,7 +163,7 @@ For		:	FOR '(' Atr ';' {
 								labelStack[sp++] = countLabel++;
 								fprintf(f,"L%d:\n",countLabel);
 							}
-			Comp ';' 		{
+			Cond ';' 		{
 								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
 								fprintf(f,"\tJUMP L%d\n",countLabel+2);
 								labelStack[sp++] = countLabel++;
@@ -347,13 +347,14 @@ Fator	:	Var		{
 		|	'!' Exp			{}
 		;
 
-Cond	:	Comp			{}
-		|	Cond '&''&' Comp 	{
-								fprintf(f,"\tMUL\n");
-							}
-		|	Cond '|''|' Comp 	{
-								fprintf(f,"\tADD\n");
-							}
+Cond	:	 Comp 				{}
+		|	'(' Cond ')'		{}
+		|	Cond '&''&' Cond 	{
+									fprintf(f,"\tMUL\n");
+								}
+		|	Cond '|''|' Cond 	{
+									fprintf(f,"\tADD\n");
+								}
 		;
 
 Comp	:	Exp				{}

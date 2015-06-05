@@ -20,14 +20,14 @@ Instr	:	If
 		|	Atr	';'
 		|	IO ';'
 
-If 		:	IF '(' Comp ')' '{' Instrs '}' Else
+If 		:	IF '(' Cond ')' '{' Instrs '}' Else
 
 Else 	:					
 		|	ELSE '{' Instrs '}'
 
-While 	: 	WHILE '(' Comp ')' '{' Instrs '}'
+While 	: 	WHILE '(' Cond ')' '{' Instrs '}'
 
-For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'
+For		:	FOR '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
 
 IO		:	PRINT Out
 		|	INPUT Var
@@ -49,6 +49,11 @@ Fator	:	Var Array
 		|	str
 		|	'(' Exp ')'
 		|	'!' Exp
+
+Cond	:	 Comp
+		|	'(' Cond ')'
+		|	Cond '&''&' Cond
+		|	Cond '|''|' Cond
 
 Comp	:	Exp
 		|	Exp OpComp Exp
