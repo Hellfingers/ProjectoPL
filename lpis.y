@@ -401,7 +401,7 @@ int main(){
 
 	symbolTable = hashCreate(1000);
 	bloco = malloc(sizeof(char*)*1000);
-	f = fopen("assemby","w");
+	f = fopen("assembly","w");
 	yyparse(); 
 	return 0; 
 }	
