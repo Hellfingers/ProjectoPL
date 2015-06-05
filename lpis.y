@@ -205,7 +205,10 @@ Out		:	Exp				{
 								}
 							}
 
-		|	str				{fprintf(f,"\tPUSHS %s\n",$1);fprintf(f,"\tWRITES\n");}
+		|	str				{
+								fprintf(f,"\tPUSHS %s\n",$1);
+								fprintf(f,"\tWRITES\n");
+							}
 		;
 
 Atr		:	Var Array '=' Exp	{
