@@ -49,12 +49,12 @@ pal [a-zA-Z]+
 						return OpA;
 					}
 
-[*\/]				{
+[*\/%]				{
 						yylval.valOp = yytext[0];
 						return OpM;
 					}
 
-\".*\"				{yylval.valc = strdup(yytext);return str;}					
+\"[^\"]*\"			{yylval.valc = strdup(yytext);return str;BEGIN INITIAL;}					
 
 (([<>][=]?)|"=="|"!=")		{
 								yylval.valc = strdup(yytext);
