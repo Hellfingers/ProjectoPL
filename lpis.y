@@ -125,7 +125,7 @@ Instr	:	If 				{}
 		|	IO ';'			{}
 		;
 
-If 		:	IF '(' Comp ')'	{
+If 		:	IF '(' Cond ')'	{
 								labelStack[sp++] = countLabel++;
 								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
 							}
@@ -345,6 +345,15 @@ Fator	:	Var		{
 		|	str 			{$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
+		;
+
+Cond	:	Comp			{}
+		|	Cond '&''&' Comp 	{
+								fprintf(f,"\tMUL\n");
+							}
+		|	Cond '|''|' Comp 	{
+								fprintf(f,"\tADD\n");
+							}
 		;
 
 Comp	:	Exp				{}
