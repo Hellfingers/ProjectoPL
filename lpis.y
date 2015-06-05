@@ -82,7 +82,7 @@
 %token <valOp> OpA OpM
 
 %type <valc> Var
-%type <vali> Exp Termo Fator Array ArrayInit
+%type <vali> Exp Termo Fator ArrayInit
 
 %%
 
@@ -113,10 +113,6 @@ InitVar	:	INT Var ArrayInit ';'		{
 	
 
 ArrayInit	:	'[' num ']'		{$$ = $2;}
-			|					{$$ = -1;}
-			;
-
-Array		:	'[' Exp ']'		{$$ = $2;}
 			|					{$$ = -1;}
 			;
 
@@ -211,56 +207,60 @@ Out		:	Exp				{
 							}
 		;
 
-Atr		:	Var Array '=' Exp	{
+Atr		:	Var '=' Exp	{
 									char aux[1000];
-								
-									if(strcmp(checkType($1),"arrayint") != 0 && $2 == -1){
-										if(strcmp(checkType($1),"int")==0){
-											if($4==1){
-												if(checkSymbol($1)){
-													initSymbol($1);
-													fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
-												}
-											}
-											else{
-												yyerror("Tipos diferentes");
+								if(strcmp(checkType($1),"arrayint")!=0){
+									if(strcmp(checkType($1),"int")==0){
+										if($3==1){
+											if(checkSymbol($1)){
+												initSymbol($1);
+												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
-										else if(strcmp(checkType($1),"string")==0){
-											if($4==2){
-												if(checkSymbol($1)){
-													initSymbol($1);
-													fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
-												}
-											}
-											else{
-												yyerror("Tipos diferentes");
-											}
-										}
-										else if(strcmp(checkType($1),"arrayint")==0){
-											if($4==1){
-												if(checkSymbol($1)){
-													initSymbol($1);
-													fprintf(f,"\tLOADN\n");	
-												}
-											}
-											else{
-												yyerror("Tipos diferentes");
-											}
-										}
-										else if(strcmp(checkType($1),"ND")==0){
-											sprintf(aux,"Variável '%s' não definida.",$1);
-											yyerror(aux);
+										else{
+											yyerror("Tipos diferentes");
 										}
 									}
-									else if(strcmp(checkType($1),"arrayint") == 0 && $2 != -1){
-										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-										fprintf(f,"\tSTOREN\n");
+									else if(strcmp(checkType($1),"string")==0){
+										if($3==2){
+											if(checkSymbol($1)){
+												initSymbol($1);
+												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
+											}
+										}
+										else{
+											yyerror("Tipos diferentes");
+										}
 									}
-									else{
-										yyerror("Tipos diferentes");
+									else if(strcmp(checkType($1),"arrayint")==0){
+										if($3==1){
+											if(checkSymbol($1)){
+												initSymbol($1);
+												fprintf(f,"\tLOADN\n");	
+											}
+										}
+										else{
+											yyerror("Tipos diferentes");
+										}
+									}
+									else if(strcmp(checkType($1),"ND")==0){
+										sprintf(aux,"Variável '%s' não definida.",$1);
+										yyerror(aux);
 									}
 								}
+								else{
+									yyerror("Tipos diferentes");
+								}
+						}
+		|	Var '[' Exp ']' '=' Exp {	
+										if(strcmp(checkType($1),"arrayint")==0){
+											fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
+											fprintf(f,"\tSTOREN\n");
+										}
+										else{
+											yyerror("Tipos diferentes");
+										}
+									}
 		;
 
 Exp		:	Termo			{}
@@ -319,32 +319,33 @@ Termo	:	Fator			{$$ = $1;}
 							}
 		;
 
-Fator	:	Var  Array		{
-								if(strcmp(checkType($1),"arrayint") != 0 && $2 == -1){
-	 								if(checkSymbol($1))
-										checkSymbolInit($1);
+Fator	:	Var		{
+								if(checkSymbol($1))
+									checkSymbolInit($1);
 
-									if(strcmp(checkType($1),"int")==0){
-										$$=1;
-										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-									}
-									else if(strcmp(checkType($1),"string")==0){
-										$$=2;
-										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-									}
-									else{
-									}
-								}
-								else if(strcmp(checkType($1),"arrayint") == 0 && $2 != -1){
+								if(strcmp(checkType($1),"int")==0){
 									$$=1;
-									printf("%s\n",checkType($1));
 									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-									fprintf(f,"\tLOADN\n");
+								}
+								else if(strcmp(checkType($1),"string")==0){
+									$$=2;
+									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 								}
 								else{
-									yyerror("Tipos diferentes");
 								}
-							}
+					}
+
+		|	Var '[' Exp ']' 	{
+									if(strcmp(checkType($1),"arrayint")==0){
+										$$=1;
+										printf("%s\n",checkType($1));
+										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
+										fprintf(f,"\tLOADN\n");
+									}
+									else{
+										yyerror("Tipos diferentes");
+									}
+								}
 		|	num				{$$ = 1; fprintf(f,"\tPUSHI %d\n", $1);}
 		|	str 			{$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
 		|	'(' Exp ')'		{}

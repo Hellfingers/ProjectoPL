@@ -10,10 +10,7 @@ InitVar	:	INT Var ArrayInit ';'
 
 ArrayInit	:	'[' num ']'
 			|	&
-
-Array		:	'[' Exp ']'
-			|	&
-
+			
 Var		:	id
 
 Instrs	:	Instr
@@ -40,7 +37,8 @@ IO		:	PRINT Out
 Out		:	Exp
 		|	str
 
-Atr		:	Var Array '=' Exp
+Atr		:	Var '=' Exp
+		|	Var '[' Exp ']' '=' Exp
 
 Exp		:	Termo			
 		|	Exp OpA	Termo
