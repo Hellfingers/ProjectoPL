@@ -50,8 +50,7 @@
 
 		res = hashIsInit(symbolTable, symb);
 
-		if(res == 0)
-			printf("Variável '%s' não inicializada!\n",symb);
+			//printf("Variável '%s' não inicializada!\n",symb);
 	}
 
 	void initSymbol(char* symb){
@@ -167,7 +166,7 @@ For		:	FOR '(' Atr ';' {
 		;
 
 IO		:	PRINT Out		{}
-		|	INPUT Var Array	{}
+		|	INPUT Var 		{printf("\tREAD\n");printf("\tATOI\n");printf("\tSTOREG %d\n", hashInd(symbolTable,$2));}
 		;
 
 Out		:	Exp				{printf("\tWRITEI\n");}
@@ -235,8 +234,12 @@ Termo	:	Fator			{}
 									case '*': 
 										printf("\tMUL\n");
 										break;
+									case '%': 
+										printf("\tMOD\n");
+										break;
 									case '&':
 										printf("\tMUL\n");
+										break;
 								}
 							}
 		;
