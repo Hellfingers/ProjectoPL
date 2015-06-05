@@ -82,7 +82,7 @@
 %token <valOp> OpA OpM
 
 %type <valc> Var
-%type <vali> Exp Termo Fator ArrayInit
+%type <vali> Exp Termo Fator
 
 %%
 
@@ -95,26 +95,21 @@ Decls	:	InitVar			{}
 		|	Decls InitVar	{}
 		;
 
-InitVar	:	INT Var ArrayInit ';'		{
-										if($3==-1){
-											insertSymbol($2,"int",$3);
-											fprintf(f,"\tPUSHI 0\n");
-										}
-										else{
-											insertSymbol($2,"arrayint",$3);
-											fprintf(f,"\tPUSHN %d\n",$3);
-										}
+InitVar	:	INT Var '[' num ']' ';'	{
+										insertSymbol($2,"arrayint",$4);
+										fprintf(f,"\tPUSHN %d\n", $4);
 									}
+										
+		|	INT Var ';'				{
+										insertSymbol($2,"int",0);
+										fprintf(f,"\tPUSHI 0\n");
+									}
+
 		|	STRING Var ';'			{
 										insertSymbol($2,"string",0);
 										fprintf(f,"\tPUSHS \"\"\n");
 									}
 		;
-	
-
-ArrayInit	:	'[' num ']'		{$$ = $2;}
-			|					{$$ = -1;}
-			;
 
 Var		:	id				{$$ = $1;}
 		;
