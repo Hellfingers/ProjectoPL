@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.6.2)  5 JUN 2015 11:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.6.2)  5 JUN 2015 17:15
 entering extended mode
 **C:/Users/Pedro*Cunha/Documentos/GitHub/ProjectoPL/Relatorio/RelatórioPL.tex
 ("C:/Users/Pedro Cunha/Documentos/GitHub/ProjectoPL/Relatorio/RelatórioPL.tex"
@@ -375,7 +375,7 @@ Cap\'{\i }tulo 3.
 [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
+Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
  []
 
@@ -383,23 +383,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--140
 Cap\'{\i }tulo 4.
 [8
 
-]
+] [9]
 Cap\'{\i }tulo 5.
-[9
+
+Underfull \hbox (badness 10000) in paragraph at lines 275--278
+
+ []
+
+[10
 
 ]
 Ap\^endice A.
-[10
+
+Overfull \hbox (16.40355pt too wide) in paragraph at lines 290--291
+[]\OT1/cmr/m/n/10 Codigo do Ana-li-sa-dor Sintatico/Analisador Sem^antico/Ger
+ador de Codigo Maquina: 
+ []
+
+[11
 
 ]
 ("C:\Users\Pedro Cunha\Documentos\GitHub\ProjectoPL\Relatorio\RelatórioPL.aux"
 ) ) 
 Here is how much of TeX's memory you used:
- 2683 strings out of 493921
- 36728 string characters out of 3147265
- 92113 words of memory out of 3000000
- 5985 multiletter control sequences out of 15000+200000
- 10197 words of font info for 36 fonts, out of 3000000 for 9000
+ 2685 strings out of 493921
+ 36749 string characters out of 3147265
+ 93114 words of memory out of 3000000
+ 5986 multiletter control sequences out of 15000+200000
+ 10543 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  26i,7n,32p,936b,248s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/P
@@ -408,10 +419,11 @@ iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fo
 nts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmtt10.pfb>
-Output written on RelatórioPL.pdf (12 pages, 120952 bytes).
+amsfonts/cm/cmti10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmtt10.pfb>
+Output written on RelatórioPL.pdf (13 pages, 135047 bytes).
 PDF statistics:
- 69 PDF objects out of 1000 (max. 8388607)
+ 77 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
