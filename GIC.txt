@@ -9,10 +9,10 @@ InitVar	:	INT Var ArrayInit ';'
 		|	STRING Var ';'	
 
 ArrayInit	:	'[' num ']'
-			|
+			|	&
 
 Array		:	'[' Exp ']'
-			|
+			|	&
 
 Var		:	id
 
