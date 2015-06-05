@@ -169,21 +169,35 @@ IO		:	PRINT Out		{}
 		|	INPUT Var 		{printf("\tREAD\n");printf("\tATOI\n");printf("\tSTOREG %d\n", hashInd(symbolTable,$2));}
 		;
 
-Out		:	Exp				{printf("\tWRITEI\n");}
+Out		:	Exp				{
+								if($1==1){printf("\tWRITEI\n");}
+								else{printf("\tWRITES\n");}}
 		|	str				{printf("\tPUSHS %s\n",$1);printf("\tWRITES\n");}
 		;
 
 Atr		:	Var '=' Exp			{
-									if(checkSymbol($1)){
-										initSymbol($1);
-										printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+
+									if(strcmp(checkType($1),"int")==0){
+										if($3==1){
+											if(checkSymbol($1)){
+												initSymbol($1);
+												printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+											}
+										}
+										else{
+											yyerror("Tipos diferentes");
+										}
 									}
-
-									if($3 == 1){
-
-									}
-									else{
-
+									else if(strcmp(checkType($1),"string")==0){
+										if($3==2){
+											if(checkSymbol($1)){
+												initSymbol($1);
+												printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+											}
+										}
+										else{
+											yyerror("Tipos diferentes");
+										}
 									}
 								}
 		|	Var Array '=' Exp			{
@@ -199,47 +213,65 @@ Atr		:	Var '=' Exp			{
 
 									}
 								}
-		|	Var '=' str		{
-								if(strcmp(checkType($1),"string")==0){
-									printf("\tPUSHS %s\n",$3);
-								}
-
-							}
 		;
 
 Exp		:	Termo			{}
 		|	Exp OpA	Termo	{
-								switch($2){
+								if($1 == 1 && $3 == 1){
+									printf("%d,%d\n",$1,$3);
+									switch($2){
 
-									case '+': 
-										printf("\tADD\n");
-										break;
-									case '-': 
-										printf("\tSUB\n");
-										break;
-									case '|':
-										printf("\tADD\n");
+										case '+': 
+											printf("\tADD\n");
+											break;
+										case '-': 
+											printf("\tSUB\n");
+											break;
+										case '|':
+											printf("\tADD\n");
+									}
+								}
+								else if($1 == 2 && $3 == 2){
+									switch($2){
+
+										case '+': 
+											printf("\tCONCAT\n");
+											break;
+										default:
+											yyerror("Tipos diferentes");
+											break;
+
+									}
+								}
+								else{
+									yyerror("Tipos diferentes");
 								}
 							}
 		;
 
 
-Termo	:	Fator			{}
+Termo	:	Fator			{$$ = $1;}
 		|	Termo OpM Fator	{
-								switch($2){	
+								if($1 == 1 && $3 == 1){
+									printf("%d,%d\n",$1,$3);
+									switch($2){	
 
-									case '/': 
-										printf("\tDIV\n");
-										break;
-									case '*': 
-										printf("\tMUL\n");
-										break;
-									case '%': 
-										printf("\tMOD\n");
-										break;
-									case '&':
-										printf("\tMUL\n");
-										break;
+										case '/': 
+											printf("\tDIV\n");
+											break;
+										case '*': 
+											printf("\tMUL\n");
+											break;
+										case '%': 
+											printf("\tMOD\n");
+											break;
+										case '&':
+											printf("\tMUL\n");
+											break;
+									}
+								}
+								else{
+									yyerror("Tipos diferentes");
 								}
 							}
 		;
@@ -248,9 +280,17 @@ Fator	:	Var  Array		{
  								if(checkSymbol($1))
 									checkSymbolInit($1);
 
-								printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
+								if(strcmp(checkType($1),"int")==0){
+									$$=1;
+								}
+								else{
+									$$=2;
+								}
+									printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
+
 							}
-		|	num				{ printf("\tPUSHI %d\n", $1);}
+		|	num				{$$ = 1; printf("\tPUSHI %d\n", $1);}
+		|	str 			{$$ = 2; printf("\tPUSHS %s\n", $1);}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
 		;
