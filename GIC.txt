@@ -1,51 +1,58 @@
-Prog	->	Decls Instrs
+Prog	:	Declss Instrs
 
-Decls	->	InitVar
+Declss	:	Decls
+
+Decls	:	InitVar
 		|	Decls InitVar
-		
-InitVar	->	'int' Var Array ';'
-		
-Var		->	id
 
-Array	:
-		|	'[' num ']''
+InitVar	:	INT Var ArrayInit ';'
+		|	STRING Var ';'	
 
-Instrs	->	Instr
+ArrayInit	:	'[' num ']'
+			|
+
+Array		:	'[' Exp ']'
+			|
+
+Var		:	id
+
+Instrs	:	Instr
 		|	Instrs Instr
-		
-Inst	->	If
+
+Instr	:	If
 		|	While
 		|	For
 		|	Atr	';'
-		|	IO	';'
-		
-If		->	'if' '(' Cond ')' '{' Instrs '}' Else
+		|	IO ';'
 
-Else	->
-		|	'else' '{' Instrs '}'
-		
-While 	-> 	'while' '(' Cond ')' '{' Instrs '}'
+If 		:	IF '(' Comp ')' '{' Instrs '}' Else
 
-For		->	'for' '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
+Else 	:					
+		|	ELSE '{' Instrs '}'
 
-Atr		->	Var Array '='	Exp
-		
-IO		->	'print' Out
-		|	'input' Var
-		
-Out		->	Exp
-		|	'\"' id '\"'
+While 	: 	WHILE '(' Comp ')' '{' Instrs '}'
 
-Exp		->	Termo
+For		:	FOR '(' Atr ';' Comp ';' Atr ')' '{' Instrs '}'
+
+IO		:	PRINT Out
+		|	INPUT Var
+
+Out		:	Exp
+		|	str
+
+Atr		:	Var Array '=' Exp
+
+Exp		:	Termo			
 		|	Exp OpA	Termo
-		
-Termo	->	Fator
+
+Termo	:	Fator
 		|	Termo OpM Fator
-		
-Fator	->	Var Array
+
+Fator	:	Var Array
 		|	num
+		|	str
 		|	'(' Exp ')'
 		|	'!' Exp
-		
-Comp	->	Exp
-		|	Exp OpConp Exp
+
+Comp	:	Exp
+		|	Exp OpComp Exp
