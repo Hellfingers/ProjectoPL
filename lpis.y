@@ -6,6 +6,7 @@
 
 	int countLabel=1;
 	int labelStack[100], sp=0;
+	FILE *f;
 
 	HashTable symbolTable;
 	char **bloco;
@@ -39,13 +40,13 @@
 	}
 
 	char* checkType(char* symb){
-		
+
 		int res;
 
 		res = hashContains(symbolTable, symb);
 
 		if(res == 0){
-			return "erro";
+			return "ND";
 		}
 		else{
 			return hashType(symbolTable,symb);
@@ -58,7 +59,7 @@
 
 		res = hashIsInit(symbolTable, symb);
 
-			//printf("Variável '%s' não inicializada!\n",symb);
+	//	printf("Warning linha %d: Variável '%s' não inicializada!\n",symb);
 	}
 
 	void initSymbol(char* symb){
@@ -85,10 +86,10 @@
 
 %%
 
-Prog	:	Declss Instrs	{printf("\tSTOP\n");}
+Prog	:	Declss Instrs	{fprintf(f,"\tSTOP\n");}
 		;
 
-Declss	:	Decls 			{printf("\tSTART\n");}
+Declss	:	Decls 			{fprintf(f,"\tSTART\n");}
 
 Decls	:	InitVar			{}
 		|	Decls InitVar	{}
@@ -96,11 +97,11 @@ Decls	:	InitVar			{}
 
 InitVar	:	INT Var Array ';'		{
 										insertSymbol($2,"int",$3);
-										printf("\tPUSHI 0\n");
+										fprintf(f,"\tPUSHI 0\n");
 									}
 		|	STRING Var ';'			{
 										insertSymbol($2,"string",0);
-										printf("\tPUSHS \"\"\n");
+										fprintf(f,"\tPUSHS \"\"\n");
 									}
 		;
 
@@ -122,65 +123,65 @@ Instr	:	If 				{}
 		|	IO ';'			{}
 		;
 
-If 		:	IF '(' Comp ')'{labelStack[sp++] = countLabel++;printf("\tJZ L%d\n",labelStack[sp-1]);} '{' Instrs '}'	Else
+If 		:	IF '(' Comp ')'{labelStack[sp++] = countLabel++;fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);} '{' Instrs '}'	Else
 		;
 
 Else 	:														{	
-																	printf("L%d:\n",labelStack[--sp]);
+																	fprintf(f,"L%d:\n",labelStack[--sp]);
 																}
 		|	ELSE 												{
-																	printf("\tJUMP L%d\n",countLabel);
-																	printf("L%d:\n",labelStack[--sp]);
+																	fprintf(f,"\tJUMP L%d\n",countLabel);
+																	fprintf(f,"L%d:\n",labelStack[--sp]);
 																	labelStack[sp++] = countLabel++;
 																	
 																} 
 			'{' Instrs '}'										{
-																	printf("L%d:\n",labelStack[--sp]);
+																	fprintf(f,"L%d:\n",labelStack[--sp]);
 																}
 		;
 
 While 	: 	WHILE 			{
 								labelStack[sp++] = countLabel++;
-								printf("L%d:\n",countLabel);
+								fprintf(f,"L%d:\n",countLabel);
 							}
 			'(' Comp ')' 	{
-								printf("\tJZ L%d\n",labelStack[sp-1]);
+								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
 								labelStack[sp++] = countLabel++;
 							}
 			'{' Instrs '}'	{
-								printf("\tJUMP L%d\n",labelStack[--sp]);
-								printf("L%d:\n",labelStack[--sp]);
+								fprintf(f,"\tJUMP L%d\n",labelStack[--sp]);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 							}
 		;
 
 For		:	FOR '(' Atr ';' {
 								labelStack[sp++] = countLabel++;
-								printf("L%d:\n",countLabel);
+								fprintf(f,"L%d:\n",countLabel);
 							}
 			Comp ';' 		{
-								printf("\tJZ L%d\n",labelStack[sp-1]);
-								printf("\tJUMP L%d\n",countLabel+2);
+								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
+								fprintf(f,"\tJUMP L%d\n",countLabel+2);
 								labelStack[sp++] = countLabel++;
-								printf("L%d:\n",countLabel++);
+								fprintf(f,"L%d:\n",countLabel++);
 							}
 			Atr ')' 		{	
-								printf("\tJUMP L%d\n", countLabel-2);
-								printf("L%d:\n",countLabel++);
+								fprintf(f,"\tJUMP L%d\n", countLabel-2);
+								fprintf(f,"L%d:\n",countLabel++);
 							}
 			'{' Instrs '}'	{
-								printf("\tJUMP L%d\n",labelStack[--sp]+1);
-								printf("L%d:\n",labelStack[--sp]);
+								fprintf(f,"\tJUMP L%d\n",labelStack[--sp]+1);
+								fprintf(f,"L%d:\n",labelStack[--sp]);
 							}
 		;
 
 IO		:	PRINT Out		{}
-		|	INPUT Var 		{printf("\tREAD\n");printf("\tATOI\n");printf("\tSTOREG %d\n", hashInd(symbolTable,$2));}
+		|	INPUT Var 		{fprintf(f,"\tREAD\n");fprintf(f,"\tATOI\n");fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$2));}
 		;
 
 Out		:	Exp				{
-								if($1==1){printf("\tWRITEI\n");}
-								else{printf("\tWRITES\n");}}
-		|	str				{printf("\tPUSHS %s\n",$1);printf("\tWRITES\n");}
+								if($1==1){fprintf(f,"\tWRITEI\n");}
+								else{fprintf(f,"\tWRITES\n");}}
+		|	str				{fprintf(f,"\tPUSHS %s\n",$1);fprintf(f,"\tWRITES\n");}
 		;
 
 Atr		:	Var '=' Exp			{
@@ -189,7 +190,7 @@ Atr		:	Var '=' Exp			{
 										if($3==1){
 											if(checkSymbol($1)){
 												initSymbol($1);
-												printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
 										else{
@@ -200,14 +201,14 @@ Atr		:	Var '=' Exp			{
 										if($3==2){
 											if(checkSymbol($1)){
 												initSymbol($1);
-												printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
 										else{
 											yyerror("Tipos diferentes");
 										}
 									}
-									else if(strcmp(checkType($1),"erro")==0){
+									else if(strcmp(checkType($1),"ND")==0){
 										sprintf(aux,"Variável '%s' não definida.",$1);
 										yyerror(aux);
 									}
@@ -215,7 +216,7 @@ Atr		:	Var '=' Exp			{
 		|	Var Array '=' Exp			{
 									if(checkSymbol($1)){
 										initSymbol($1);
-										printf("\tSTOREG %d\n", hashInd(symbolTable,$1));	
+										fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 									}
 
 									if($2 == 1){
@@ -232,20 +233,20 @@ Exp		:	Termo			{}
 								if($1 == 1 && $3 == 1){
 									switch($2){
 										case '+': 
-											printf("\tADD\n");
+											fprintf(f,"\tADD\n");
 											break;
 										case '-': 
-											printf("\tSUB\n");
+											fprintf(f,"\tSUB\n");
 											break;
 										case '|':
-											printf("\tADD\n");
+											fprintf(f,"\tADD\n");
 									}
 								}
 								else if($1 == 2 && $3 == 2){
 									switch($2){
 
 										case '+': 
-											printf("\tCONCAT\n");
+											fprintf(f,"\tCONCAT\n");
 											break;
 										default:
 											yyerror("Tipos diferentes");
@@ -264,16 +265,16 @@ Termo	:	Fator			{$$ = $1;}
 									switch($2){	
 
 										case '/': 
-											printf("\tDIV\n");
+											fprintf(f,"\tDIV\n");
 											break;
 										case '*': 
-											printf("\tMUL\n");
+											fprintf(f,"\tMUL\n");
 											break;
 										case '%': 
-											printf("\tMOD\n");
+											fprintf(f,"\tMOD\n");
 											break;
 										case '&':
-											printf("\tMUL\n");
+											fprintf(f,"\tMUL\n");
 											break;
 									}
 								}
@@ -289,18 +290,18 @@ Fator	:	Var  Array		{
 
 								if(strcmp(checkType($1),"int")==0){
 									$$=1;
-									printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
+									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 								}
 								else if(strcmp(checkType($1),"string")==0){
 									$$=2;
-									printf("\tPUSHG %d\n", hashInd(symbolTable,$1));
+									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 								}
 								else {
 								}
 
 							}
-		|	num				{$$ = 1; printf("\tPUSHI %d\n", $1);}
-		|	str 			{$$ = 2; printf("\tPUSHS %s\n", $1);}
+		|	num				{$$ = 1; fprintf(f,"\tPUSHI %d\n", $1);}
+		|	str 			{$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
 		|	'(' Exp ')'		{}
 		|	'!' Exp			{}
 		;
@@ -311,26 +312,26 @@ Comp	:	Exp				{}
 
 									case '>':
 										if($2[1] == '='){
-											printf("\tSUPEQ\n");
+											fprintf(f,"\tSUPEQ\n");
 										}
 										else{
-											printf("\tSUP\n");
+											fprintf(f,"\tSUP\n");
 										}
 										break;
 									case '<':
 										if($2[1] == '='){
-											printf("\tINFEQ\n");
+											fprintf(f,"\tINFEQ\n");
 										}
 										else{
-											printf("\tINF\n");
+											fprintf(f,"\tINF\n");
 										}
 										break;
 									case '=':
-										printf("\tEQUAL\n");
+										fprintf(f,"\tEQUAL\n");
 										break;
 									case '!':
-										printf("\tEQUAL\n");
-										printf("\tNOT\n");
+										fprintf(f,"\tEQUAL\n");
+										fprintf(f,"\tNOT\n");
 										break;
 
 								}
@@ -349,6 +350,7 @@ int main(){
 
 	symbolTable = hashCreate(1000);
 	bloco = malloc(sizeof(char*)*1000);
+	f = fopen("assemby","w");
 	yyparse(); 
 	return 0; 
 }	
