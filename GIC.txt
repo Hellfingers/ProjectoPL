@@ -5,12 +5,10 @@ Declss	:	Decls
 Decls	:	InitVar
 		|	Decls InitVar
 
-InitVar	:	INT Var ArrayInit ';'
-		|	STRING Var ';'	
+InitVar	:	INT Var '[' num ']' ';'
+		|	INT Var ';'
+		|	STRING Var ';'
 
-ArrayInit	:	'[' num ']'
-			|	&
-			
 Var		:	id
 
 Instrs	:	Instr
