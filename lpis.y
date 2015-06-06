@@ -335,7 +335,7 @@ Fator	:	Var		{
 		|	num				{$$ = 1; fprintf(f,"\tPUSHI %d\n", $1);}
 		|	str 			{$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
 		|	'(' Exp ')'		{}
-		|	'!' Exp			{}
+		|	'!' Exp			{fprintf(f, "\tNOT\n" );}
 		;
 
 Cond	:	 Comp 				{}
