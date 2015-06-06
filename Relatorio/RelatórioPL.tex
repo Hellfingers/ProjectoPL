@@ -149,16 +149,17 @@ Comp    :   Exp
 Para realizarmos a análise semântica temos uma tabela de Hash para guardar todos os identificadores de variáveis e seus tipos de dados. \\A estrutura de dados da tabela de Hash é a seguinte:\\
 \begin{verbatim}
 struct list{
-           char *key;
-           char *type;
-           int init;
-           int ind;
-           struct list* next;};
+    char *key;
+    char *type;
+    int init;
+    int ind;
+    struct list* next;
+};
 
 struct table{
-           int size;
-           int elems;
-           struct list **list;
+    int size;
+    int elems;
+    struct list **list;
 };
 \end{verbatim}
 Com a estrutura acima referida podemos então informações sobre uma variável (Identificador, Tipo, Estado de Inicialização e Índice do Registo na Máquina).
@@ -171,8 +172,9 @@ O programa abaixo quebra uma das regras estipuladas para a Linguagem de Programa
 \begin{verbatim}
 int a;
 int b;
-for(b=0;b<10;b=b+1)
+for(b=0;b<10;b=b+1){
      int c=b;
+}
 print a;
 \end{verbatim}
 \subsection{Programas com erros semânticos}\label{esem}
@@ -182,9 +184,11 @@ O programa que se segue quebra uma das especificações da linguagem: " Não dev
 \begin{verbatim}
 int a;
 int b;
-for(a=0;a<10;a=a+1)
-      for(b=10;b>0;b=b-1)
+for(a=0;a<10;a=a+1){
+        for(b=10;b>0;b=b-1){
             c=c+a+b;
+        }
+}
 print a;
 \end{verbatim}
 \subsection{Programas correctos}\label{pc}
@@ -204,15 +208,15 @@ print "Insira o numero de termos";
 input n;
  
 for(i=0;i<n;i=i+1){
-        if(i<=1){
-                next=i;
-        }
-        else{
-                next = first + second;
-                first = second;
-                second = next;
-        }
-        print next;
+    if(i<=1){
+        next=i;
+    }
+    else{
+        next = first + second;
+        first = second;
+        second = next;
+    }
+    print next;
 }
 \end{verbatim}
 
