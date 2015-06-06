@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.3.28)  6 JUN 2015 16:43
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.3.28)  6 JUN 2015 18:21
 entering extended mode
  %&-line parsing enabled.
 **RelatórioPL.tex
@@ -405,313 +405,307 @@ erador de C^^Sodigo M^^Saquina:
  []
 
 [15]
-Overfull \hbox (59.24648pt too wide) in paragraph at lines 897--897
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 892--892
 []    \OT1/cmtt/m/n/10 //    printf("Warning linha %d: Vari^^Savel '%s' n~ao in
 icializada!\n",symb);[] 
  []
 
 [16]
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 897--897
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 insertSymbol($2,"arr
 ayint",$4);[] 
  []
 
 
-Overfull \hbox (22.4968pt too wide) in paragraph at lines 897--897
+Overfull \hbox (22.4968pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 fprintf(f,"\tPUSHN %
 d\n", $4);[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 insertSymbol($2,"str
 ing",0);[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 fprintf(f,"\tPUSHS \
 "\"\n");[] 
  []
 
 [17]
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 897--897
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJZ L%d\n",label
 Stack[sp-1]);[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"L%d:\n",labelStac
 k[--sp]);[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJUMP L%d\n",cou
 ntLabel);[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"L%d:\n",labelStac
 k[--sp]);[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"L%d:\n",labelStac
 k[--sp]);[] 
  []
 
 
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 897--897
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJZ L%d\n",label
 Stack[sp-1]);[] 
  []
 
 
-Overfull \hbox (48.74657pt too wide) in paragraph at lines 897--897
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJUMP L%d\n",lab
 elStack[--sp]);[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"L%d:\n",labelStac
 k[--sp]);[] 
  []
 
 
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 897--897
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJZ L%d\n",label
 Stack[sp-1]);[] 
  []
 
 
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 897--897
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJUMP L%d\n",cou
 ntLabel+2);[] 
  []
 
-[18]
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJUMP L%d\n", co
 untLabel-2);[] 
  []
 
-
-Overfull \hbox (59.24648pt too wide) in paragraph at lines 897--897
+[18]
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tJUMP L%d\n",lab
 elStack[--sp]+1);[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"L%d:\n",labelStac
 k[--sp]);[] 
  []
 
 
-Overfull \hbox (95.99615pt too wide) in paragraph at lines 897--897
+Overfull \hbox (95.99615pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 fprintf(f,"\tSTOREG %d\n", h
 ashInd(symbolTable,$2));[] 
  []
 
 
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 if(strcmp(checkType($1),"arr
 ayint")!=0){[] 
  []
 
 
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 897--897
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 if(strcmp(checkType($1),
 "int")==0){[] 
  []
 
 
-Overfull \hbox (43.49661pt too wide) in paragraph at lines 897--897
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 892--892
 []                                                \OT1/cmtt/m/n/10 fprintf(f,"\
 tSTOREG %d\n",[] 
  []
 
 
-Overfull \hbox (59.24648pt too wide) in paragraph at lines 897--897
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 892--892
 []                                                    \OT1/cmtt/m/n/10 hashInd(
 symbolTable,$1));[] 
  []
 
-[19]
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 yyerror("Tipos d
 iferentes");[] 
  []
 
-
-Overfull \hbox (69.74638pt too wide) in paragraph at lines 897--897
+[19]
+Overfull \hbox (69.74638pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 else if(strcmp(checkType
 ($1),"string")==0){[] 
  []
 
 
-Overfull \hbox (43.49661pt too wide) in paragraph at lines 897--897
+Overfull \hbox (43.49661pt too wide) in paragraph at lines 892--892
 []                                                \OT1/cmtt/m/n/10 fprintf(f,"\
 tSTOREG %d\n",[] 
  []
 
 
-Overfull \hbox (59.24648pt too wide) in paragraph at lines 897--897
+Overfull \hbox (59.24648pt too wide) in paragraph at lines 892--892
 []                                                    \OT1/cmtt/m/n/10 hashInd(
 symbolTable,$1));[] 
  []
 
 
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 yyerror("Tipos d
 iferentes");[] 
  []
 
 
-Overfull \hbox (80.24629pt too wide) in paragraph at lines 897--897
+Overfull \hbox (80.24629pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 else if(strcmp(checkType
 ($1),"arrayint")==0){[] 
  []
 
 
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 897--897
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 892--892
 []                                                \OT1/cmtt/m/n/10 fprintf(f,"\
 tLOADN\n");[] 
  []
 
 
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 yyerror("Tipos d
 iferentes");[] 
  []
 
 
-Overfull \hbox (48.74657pt too wide) in paragraph at lines 897--897
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 else if(strcmp(checkType
 ($1),"ND")==0){[] 
  []
 
 
-Overfull \hbox (106.49606pt too wide) in paragraph at lines 897--897
+Overfull \hbox (106.49606pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 sprintf(aux,"Vari^^S
 avel '%s' n~ao definida.",$1);[] 
  []
 
 
-Overfull \hbox (74.99634pt too wide) in paragraph at lines 897--897
+Overfull \hbox (74.99634pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 if(strcmp(checkType(
 $1),"arrayint")==0){[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 fprintf(f,"\tPUS
 HG %d\n",[] 
  []
 
 
-Overfull \hbox (38.24666pt too wide) in paragraph at lines 897--897
+Overfull \hbox (38.24666pt too wide) in paragraph at lines 892--892
 []                                                \OT1/cmtt/m/n/10 hashInd(symb
 olTable,$1));[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 fprintf(f,"\tSTO
 REN\n");[] 
  []
 
 
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 yyerror("Tipos d
 iferentes");[] 
  []
 
 [20]
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 fprintf(f,"\tCON
 CAT\n");[] 
  []
 
 
-Overfull \hbox (32.9967pt too wide) in paragraph at lines 897--897
+Overfull \hbox (32.9967pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 yyerror("Tipos d
 iferentes");[] 
  []
 
 [21]
-Overfull \hbox (6.74693pt too wide) in paragraph at lines 897--897
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 if(strcmp(checkType($1),"int
 ")==0){[] 
  []
 
 
-Overfull \hbox (111.74602pt too wide) in paragraph at lines 897--897
+Overfull \hbox (111.74602pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 fprintf(f,"\tPUSHG %d\n"
 , hashInd(symbolTable,$1));[] 
  []
 
 
-Overfull \hbox (48.74657pt too wide) in paragraph at lines 897--897
+Overfull \hbox (48.74657pt too wide) in paragraph at lines 892--892
 []                                \OT1/cmtt/m/n/10 else if(strcmp(checkType($1)
 ,"string")==0){[] 
  []
 
 
-Overfull \hbox (111.74602pt too wide) in paragraph at lines 897--897
+Overfull \hbox (111.74602pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 fprintf(f,"\tPUSHG %d\n"
 , hashInd(symbolTable,$1));[] 
  []
 
 
-Overfull \hbox (53.99652pt too wide) in paragraph at lines 897--897
+Overfull \hbox (53.99652pt too wide) in paragraph at lines 892--892
 []                                    \OT1/cmtt/m/n/10 if(strcmp(checkType($1),
 "arrayint")==0){[] 
  []
 
 
-Overfull \hbox (17.24684pt too wide) in paragraph at lines 897--897
-[]                                        \OT1/cmtt/m/n/10 printf("%s\n",checkT
-ype($1));[] 
- []
-
-
-Overfull \hbox (132.74583pt too wide) in paragraph at lines 897--897
+Overfull \hbox (132.74583pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 fprintf(f,"\tPUSHG %
 d\n", hashInd(symbolTable,$1));[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []                                        \OT1/cmtt/m/n/10 yyerror("Tipos difer
 entes");[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []        \OT1/cmtt/m/n/10 |   num             {$$ = 1; fprintf(f,"\tPUSHI %d\n
 ", $1);}[] 
  []
 
 
-Overfull \hbox (11.99689pt too wide) in paragraph at lines 897--897
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 892--892
 []        \OT1/cmtt/m/n/10 |   str             {$$ = 2; fprintf(f,"\tPUSHS %s\n
 ", $1);}[] 
  []
 
 [22]
-Overfull \hbox (6.74693pt too wide) in paragraph at lines 897--897
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 fprintf(f,"\tSUP
 EQ\n");[] 
  []
 
 
-Overfull \hbox (6.74693pt too wide) in paragraph at lines 897--897
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 892--892
 []                                            \OT1/cmtt/m/n/10 fprintf(f,"\tINF
 EQ\n");[] 
  []
@@ -720,7 +714,7 @@ EQ\n");[]
 Here is how much of TeX's memory you used:
  2680 strings out of 495061
  35753 string characters out of 1182621
- 105925 words of memory out of 3000000
+ 104813 words of memory out of 3000000
  5867 multiletter control sequences out of 15000+50000
  10543 words of font info for 37 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -733,7 +727,7 @@ xmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1
 /public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
 fonts/cm/cmtt10.pfb>
-Output written on RelatórioPL.pdf (26 pages, 148807 bytes).
+Output written on RelatórioPL.pdf (26 pages, 148788 bytes).
 PDF statistics:
  118 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
