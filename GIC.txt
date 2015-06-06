@@ -1,50 +1,51 @@
-Prog	:	Declss Instrs
+Prog	->	Declss Instrs
 
-Declss	:	Decls
+Declss	->	Decls	
 
-Decls	:	InitVar
+Decls	->	InitVar
 		|	Decls InitVar
 
-InitVar	:	INT Var '[' num ']' ';'
+InitVar	->	INT Var '[' num ']' ';'
 		|	INT Var ';'
 		|	STRING Var ';'
 
-Var		:	id
+Var		->	id
 
-Instrs	:	Instr
+Instrs	->	Instr
 		|	Instrs Instr
 
-Instr	:	If
+Instr	->	If
 		|	While
 		|	For
 		|	Atr	';'
 		|	IO ';'
 
-If 		:	IF '(' Cond ')' '{' Instrs '}' Else
+If 		->	IF '(' Cond ')' '{' Instrs '}' Else
 
-Else 	:					
+Else 	->	&
 		|	ELSE '{' Instrs '}'
 
-While 	: 	WHILE '(' Cond ')' '{' Instrs '}'
+While 	-> 	WHILE '(' Cond ')' '{' Instrs '}'
 
-For		:	FOR '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
+For		->	FOR '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
 
-IO		:	PRINT Out
+IO		->	PRINT Out
 		|	INPUT Var
 
-Out		:	Exp
+Out		->	Exp
 		|	str
 
-Atr		:	Var '=' Exp
+Atr		->	Var '=' Exp
 		|	Var '[' Exp ']' '=' Exp
 
-Exp		:	Termo			
+Exp		->	Termo
 		|	Exp OpA	Termo
 
-Termo	:	Fator
+Termo	->	Fator
 		|	Termo OpM Fator
 
-Fator	:	Var Array
+Fator	->	Var
+		|	Var '[' Exp ']'
 		|	num
 		|	str
 		|	'(' Exp ')'
