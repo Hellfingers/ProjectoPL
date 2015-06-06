@@ -13,5 +13,5 @@
 \contentsline {chapter}{\numberline {4}Codifica\IeC {\c c}\IeC {\~a}o e Testes}{8}
 \contentsline {section}{\numberline {4.1}Decis\IeC {\~o}es de Implementa\IeC {\c c}\IeC {\~a}o}{8}
 \contentsline {section}{\numberline {4.2}Testes realizados e Resultados}{8}
-\contentsline {chapter}{\numberline {5}Conclus\IeC {\~a}o}{10}
-\contentsline {chapter}{\numberline {A}C\IeC {\'o}digo do Programa}{11}
+\contentsline {chapter}{\numberline {5}Conclus\IeC {\~a}o}{12}
+\contentsline {chapter}{\numberline {A}C\IeC {\'o}digo do Programa}{13}

@@ -62,7 +62,7 @@ Neste projecto é pretendido o desenho de uma Linguagem de Programação Imperat
 \section{Especificação do Requisitos}
 Os requisitos para o compilador/linguagem a implementar são os seguintes:
 \begin{itemize}
-  \item Permitir manusear variáveis do tipo inteiro(escalar ou array).
+  \item Permitir manusear variáveis do tipo inteiro(escalar ou array) e do tipo string.
   \item Realizar as seguintes operações:
 	\begin{itemize}
 	\item Atribuições de expressões a variáveis.
@@ -82,58 +82,67 @@ Os requisitos para o compilador/linguagem a implementar são os seguintes:
 Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C, funcionando como uma versão simplificada do C.\\Abaixo encontra-se a gramática desenhada para a Linguagem:
 
 \begin{verbatim}
-Prog	->	Decls Instrs
+Prog	->	Declss Instrs
+
+Declss	->	Decls	
 
 Decls	->	InitVar
-      |	Decls InitVar
-		
-InitVar	->INT Var '[' num ']' ';'
-        |	INT Var ';'
-        | STRING Var ';'
-		
+		|	Decls InitVar
+
+InitVar	->	INT Var '[' num ']' ';'
+		|	INT Var ';'
+		|	STRING Var ';'
+
 Var		->	id
 
-
 Instrs	->	Instr
-       |	Instrs Instr
-		
-Inst	->	If
-     |	While
-     |	For
-     |	Atr	';'
-     |	IO	';'
-		
-If		->	'if' '(' Cond ')' '{' Instrs '}' Else
+		|	Instrs Instr
 
-Else	->
-     |	'else' '{' Instrs '}'
-		
-While 	-> 	'while' '(' Cond ')' '{' Instrs '}'
+Instr	->	If
+		|	While
+		|	For
+		|	Atr	';'
+		|	IO ';'
 
-For	->	'for' '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
+If 		->	IF '(' Cond ')' '{' Instrs '}' Else
 
-Atr      ->	Var '=' Exp
-         |	Var '[' Exp ']' '=' Exp
-		
-IO	->	'print' Out
-   |	'input' Var
-	
-Out	->	Exp
-    |	'\"' id '\"'
+Else 	->	&
+		|	ELSE '{' Instrs '}'
 
-Exp	->	Termo
-    |	Exp OpA	Termo
-		
+While 	-> 	WHILE '(' Cond ')' '{' Instrs '}'
+
+For		->	FOR '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
+
+IO		->	PRINT Out
+		|	INPUT Var
+		|	INPUT Var '[' Exp ']'
+
+Out		->	Exp
+		|	str
+
+Atr		->	Var '=' Exp
+		|	Var '[' Exp ']' '=' Exp
+
+Exp		->	Termo
+		|	Exp OpA	Termo
+
 Termo	->	Fator
-      |	Termo OpM Fator
-		
-Fator	->	Var Array
-      |	num
-      |	'(' Exp ')'
-      |	'!' Exp
-		
-Comp	->	Exp
-     |	Exp OpConp Exp
+		|	Termo OpM Fator
+
+Fator	->	Var
+		|	Var '[' Exp ']'
+		|	num
+		|	str
+		|	'(' Exp ')'
+		|	'!' Exp
+
+Cond	:	 Comp
+		|	'(' Cond ')'
+		|	Cond '&''&' Cond
+		|	Cond '|''|' Cond
+
+Comp	:	Exp
+		|	Exp OpComp Exp
 \end{verbatim}
 
 \section{Estruturas de Dados}
@@ -144,7 +153,6 @@ struct list{
            char *type;
            int init;
            int ind;
-           int tamanho;
            struct list* next;};
 
 struct table{
@@ -153,7 +161,7 @@ struct table{
            struct list **list;
 };
 \end{verbatim}
-Com a estrutura acima referida podemos então informações sobre uma variável (Identificador, Tipo, Estado de Inicialização, Índice do Registo na Máquina e Tamanho, que será 1 caso se trate de uma variável escalar ou então será o tamanho do vector).
+Com a estrutura acima referida podemos então informações sobre uma variável (Identificador, Tipo, Estado de Inicialização e Índice do Registo na Máquina).
 
 \section{Exemplos de Programas da Linguagem}
 Abaixo irão estar apresentados vários programas, em que os dois primeiros não cumprem os requisitos sintáticos (\ref{esint}) e semânticos (\ref{esem}) da nossa linguagem. Posteriormente iremos apresentar um programa que esteja sintática e semanticamente correcto (\ref{pc}).
@@ -216,7 +224,7 @@ Mostram-se a seguir alguns testes feitos (valores introduzidos) e
 os respectivos resultados obtidos:\\
 Para o exemplo encontrado em \ref{pc} o assembly gerado é o seguinte:
 \begin{verbatim}
-PUSHI 0
+		PUSHI 0
         PUSHI 0
         PUSHI 0
         PUSHI 0
@@ -270,6 +278,108 @@ L1:
         STOP
 \end{verbatim}
 
+Cálculo do menor elemento de um array:
+Input:
+\begin{verbatim}
+int a[30];
+int i;
+int num;
+int menor;
+
+print "Insira o numero total de elementos:";
+input num;
+
+for(i=0;i<num;i=i+1){
+	print "Insira um numero";
+	input a[i];
+}
+
+menor = a[0];
+
+for(i=0;i<num;i=i+1){
+	if(a[i]<menor){
+		menor = a[i];
+	}
+}
+
+print "O menor elemento é o: ";
+print menor;
+\end{verbatim}
+Output:
+\begin{verbatim}
+		PUSHN 30
+		PUSHI 0
+		PUSHI 0
+		PUSHI 0
+		START
+		PUSHS "Insira o numero total de elementos:"
+		WRITES
+		READ
+		ATOI
+		STOREG 2
+		PUSHI 0
+		STOREG 1
+L2:
+		PUSHG 1
+		PUSHG 2
+		INF
+		JZ L1
+		JUMP L4
+L3:
+		PUSHG 1
+		PUSHI 1
+		ADD
+		STOREG 1
+		JUMP L2
+L4:
+		PUSHS "Insira um numero"
+		WRITES
+		PUSHG 1
+		PUSHG 0
+		READ
+		ATOI
+		STOREN
+		JUMP L3
+L1:
+		PUSHI 0
+		PUSHG 0
+		LOADN
+		STOREG 3
+		PUSHI 0
+		STOREG 1
+L6:
+		PUSHG 1
+		PUSHG 2
+		INF
+		JZ L5
+		JUMP L8
+L7:
+		PUSHG 1
+		PUSHI 1
+		ADD
+		STOREG 1
+		JUMP L6
+L8:
+		PUSHG 1
+		PUSHG 0
+		LOADN
+		PUSHG 3
+		INF
+		JZ L9
+		PUSHG 1
+		PUSHG 0
+		LOADN
+		STOREG 3
+L9:
+		JUMP L7
+L5:
+		PUSHS "O menor elemento é o: "
+		WRITES
+		PUSHG 3
+		WRITEI
+		STOP
+
+\end{verbatim}
 
 \chapter{Conclusão} \label {conc}
 Um compilador é uma peça de software complexa que tem uma tarefa crítica na geração de executáveis. Todas as instruções em código máquina deverão estar correctas e deverá haver pouquíssima tolerância a erros, já que a falha em alguma das instruçoes poderá ter consequências catastróficas.\\Acima foi apresentada a gramática, decisões tomadas na geração de código máquina e exemplos de programas correctos segundo a mesma. No apêndice deste documento iremos apresentar o código utilizado na resolução do projecto.\\
