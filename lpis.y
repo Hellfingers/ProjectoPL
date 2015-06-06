@@ -7,17 +7,14 @@
 	int countLabel=1;
 	int labelStack[100], sp=0;
 	FILE *f;
-
 	HashTable symbolTable;
-	char **bloco;
-	int i;
 
-	void insertSymbol(char* symb, char* type, int tamanho){
+	void insertSymbol(char* symb, char* type){
 
 		int res;
 		char aux[1000];
 
-		res = hashInsert(symbolTable, symb, type, tamanho);
+		res = hashInsert(symbolTable, symb, type);
 
 		if(res == 0){
 			sprintf(aux,"Variável '%s' já definida.",symb);
@@ -96,17 +93,17 @@ Decls	:	InitVar			{}
 		;
 
 InitVar	:	INT Var '[' num ']' ';'	{
-										insertSymbol($2,"arrayint",$4);
+										insertSymbol($2,"arrayint");
 										fprintf(f,"\tPUSHN %d\n", $4);
 									}
 										
 		|	INT Var ';'				{
-										insertSymbol($2,"int",0);
+										insertSymbol($2,"int");
 										fprintf(f,"\tPUSHI 0\n");
 									}
 
 		|	STRING Var ';'			{
-										insertSymbol($2,"string",0);
+										insertSymbol($2,"string");
 										fprintf(f,"\tPUSHS \"\"\n");
 									}
 		;
@@ -268,8 +265,6 @@ Exp		:	Termo			{}
 										case '-': 
 											fprintf(f,"\tSUB\n");
 											break;
-										case '|':
-											fprintf(f,"\tADD\n");
 									}
 								}
 								else if($1 == 2 && $3 == 2){
@@ -303,9 +298,6 @@ Termo	:	Fator			{$$ = $1;}
 										case '%': 
 											fprintf(f,"\tMOD\n");
 											break;
-										case '&':
-											fprintf(f,"\tMUL\n");
-											break;
 									}
 								}
 								else{
@@ -333,7 +325,6 @@ Fator	:	Var		{
 		|	Var '[' Exp ']' 	{
 									if(strcmp(checkType($1),"arrayint")==0){
 										$$=1;
-										printf("%s\n",checkType($1));
 										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
 										fprintf(f,"\tLOADN\n");
 									}
@@ -400,8 +391,7 @@ int yyerror(char *s){
 int main(){
 
 	symbolTable = hashCreate(1000);
-	bloco = malloc(sizeof(char*)*1000);
-	f = fopen("assembly","w");
+	f = fopen("assembly.vm","w");
 	yyparse(); 
 	return 0; 
 }	

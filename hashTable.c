@@ -7,7 +7,6 @@ struct list{
 	char *type;
 	int init;
 	int ind;
-	int tamanho;
 	struct list* next;
 };
 
@@ -34,6 +33,7 @@ struct table* hashCreate(int size){
 	return table;
 }
 
+/*dbj2*/
 unsigned long hash(unsigned char *str){
 
 	unsigned long hash = 5381;
@@ -45,7 +45,7 @@ unsigned long hash(unsigned char *str){
 	return hash;
 }
 
-int hashInsert(struct table* t, char* key, char* type, int ind){
+int hashInsert(struct table* t, char* key, char* type){
 
 	struct list *aux;
 	long h;
@@ -59,7 +59,6 @@ int hashInsert(struct table* t, char* key, char* type, int ind){
 	aux->type = strdup(type);
 	aux->init = 0;
 	aux->ind = t->elems;
-	aux->tamanho = ind;
 
 	t->elems++;
 

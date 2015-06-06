@@ -10,9 +10,18 @@ pal [a-zA-Z]+
 
 %%
 
-\/\/.*			{
+
+.*\/\/.*		{
 					;
 				}
+		
+.*\/\*			{
+					BEGIN COMENTARIO;
+				}
+
+<COMENTARIO>\*\/	{BEGIN INITIAL;}
+
+<COMENTARIO>.|\n 	{;}
 
 "int"	     	{ 
 					return INT; 
@@ -56,7 +65,7 @@ pal [a-zA-Z]+
 						return OpM;
 					}
 
-\"[^\"]*\"			{yylval.valc = strdup(yytext);return str;BEGIN INITIAL;}					
+\"[^\"]*\"			{yylval.valc = strdup(yytext);return str;}
 
 (([<>][=]?)|"=="|"!=")		{
 								yylval.valc = strdup(yytext);
