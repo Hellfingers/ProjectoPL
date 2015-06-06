@@ -82,67 +82,67 @@ Os requisitos para o compilador/linguagem a implementar são os seguintes:
 Ao desenvolver a gramática tentámos fazer com que a mesma ficasse o mais próximo possível do C, funcionando como uma versão simplificada do C.\\Abaixo encontra-se a gramática desenhada para a Linguagem:
 
 \begin{verbatim}
-Prog	->	Declss Instrs
+Prog    ->  Declss Instrs
 
-Declss	->	Decls	
+Declss  ->  Decls
 
-Decls	->	InitVar
-		|	Decls InitVar
+Decls   ->  InitVar
+        |   Decls InitVar
 
-InitVar	->	INT Var '[' num ']' ';'
-		|	INT Var ';'
-		|	STRING Var ';'
+InitVar ->  INT Var '[' num ']' ';'
+        |   INT Var ';'
+        |   STRING Var ';'
 
-Var		->	id
+Var     ->  id
 
-Instrs	->	Instr
-		|	Instrs Instr
+Instrs  ->  Instr
+        |   Instrs Instr
 
-Instr	->	If
-		|	While
-		|	For
-		|	Atr	';'
-		|	IO ';'
+Instr   ->  If
+        |   While
+        |   For
+        |   Atr ';'
+        |   IO ';'
 
-If 		->	IF '(' Cond ')' '{' Instrs '}' Else
+If      ->  IF '(' Cond ')' '{' Instrs '}' Else
 
-Else 	->	&
-		|	ELSE '{' Instrs '}'
+Else    ->  &
+        |   ELSE '{' Instrs '}'
 
-While 	-> 	WHILE '(' Cond ')' '{' Instrs '}'
+While   ->  WHILE '(' Cond ')' '{' Instrs '}'
 
-For		->	FOR '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
+For     ->  FOR '(' Atr ';' Cond ';' Atr ')' '{' Instrs '}'
 
-IO		->	PRINT Out
-		|	INPUT Var
-		|	INPUT Var '[' Exp ']'
+IO      ->  PRINT Out
+        |   INPUT Var
+        |   INPUT Var '[' Exp ']'
 
-Out		->	Exp
-		|	str
+Out     ->  Exp
+        |   str
 
-Atr		->	Var '=' Exp
-		|	Var '[' Exp ']' '=' Exp
+Atr     ->  Var '=' Exp
+        |   Var '[' Exp ']' '=' Exp
 
-Exp		->	Termo
-		|	Exp OpA	Termo
+Exp     ->  Termo
+        |   Exp OpA Termo
 
-Termo	->	Fator
-		|	Termo OpM Fator
+Termo   ->  Fator
+        |   Termo OpM Fator
 
-Fator	->	Var
-		|	Var '[' Exp ']'
-		|	num
-		|	str
-		|	'(' Exp ')'
-		|	'!' Exp
+Fator   ->  Var
+        |   Var '[' Exp ']'
+        |   num
+        |   str
+        |   '(' Exp ')'
+        |   '!' Exp
 
-Cond	:	 Comp
-		|	'(' Cond ')'
-		|	Cond '&''&' Cond
-		|	Cond '|''|' Cond
+Cond    :   Comp
+        |   '(' Cond ')'
+        |   Cond '&''&' Cond
+        |   Cond '|''|' Cond
 
-Comp	:	Exp
-		|	Exp OpComp Exp
+Comp    :   Exp
+        |   Exp OpComp Exp
 \end{verbatim}
 
 \section{Estruturas de Dados}
@@ -224,7 +224,7 @@ Mostram-se a seguir alguns testes feitos (valores introduzidos) e
 os respectivos resultados obtidos:\\
 Para o exemplo encontrado em \ref{pc} o assembly gerado é o seguinte:
 \begin{verbatim}
-		PUSHI 0
+        PUSHI 0
         PUSHI 0
         PUSHI 0
         PUSHI 0
@@ -290,16 +290,16 @@ print "Insira o numero total de elementos:";
 input num;
 
 for(i=0;i<num;i=i+1){
-	print "Insira um numero";
-	input a[i];
+    print "Insira um numero";
+    input a[i];
 }
 
 menor = a[0];
 
 for(i=0;i<num;i=i+1){
-	if(a[i]<menor){
-		menor = a[i];
-	}
+    if(a[i]<menor){
+        menor = a[i];
+    }
 }
 
 print "O menor elemento é o: ";
@@ -307,77 +307,77 @@ print menor;
 \end{verbatim}
 Output:
 \begin{verbatim}
-		PUSHN 30
-		PUSHI 0
-		PUSHI 0
-		PUSHI 0
-		START
-		PUSHS "Insira o numero total de elementos:"
-		WRITES
-		READ
-		ATOI
-		STOREG 2
-		PUSHI 0
-		STOREG 1
+        PUSHN 30
+        PUSHI 0
+        PUSHI 0
+        PUSHI 0
+        START
+        PUSHS "Insira o numero total de elementos:"
+        WRITES
+        READ
+        ATOI
+        STOREG 2
+        PUSHI 0
+        STOREG 1
 L2:
-		PUSHG 1
-		PUSHG 2
-		INF
-		JZ L1
-		JUMP L4
+        PUSHG 1
+        PUSHG 2
+        INF
+        JZ L1
+        JUMP L4
 L3:
-		PUSHG 1
-		PUSHI 1
-		ADD
-		STOREG 1
-		JUMP L2
+        PUSHG 1
+        PUSHI 1
+        ADD
+        STOREG 1
+        JUMP L2
 L4:
-		PUSHS "Insira um numero"
-		WRITES
-		PUSHG 1
-		PUSHG 0
-		READ
-		ATOI
-		STOREN
-		JUMP L3
+        PUSHS "Insira um numero"
+        WRITES
+        PUSHG 1
+        PUSHG 0
+        READ
+        ATOI
+        STOREN
+        JUMP L3
 L1:
-		PUSHI 0
-		PUSHG 0
-		LOADN
-		STOREG 3
-		PUSHI 0
-		STOREG 1
+        PUSHI 0
+        PUSHG 0
+        LOADN
+        STOREG 3
+        PUSHI 0
+        STOREG 1
 L6:
-		PUSHG 1
-		PUSHG 2
-		INF
-		JZ L5
-		JUMP L8
+        PUSHG 1
+        PUSHG 2
+        INF
+        JZ L5
+        JUMP L8
 L7:
-		PUSHG 1
-		PUSHI 1
-		ADD
-		STOREG 1
-		JUMP L6
+        PUSHG 1
+        PUSHI 1
+        ADD
+        STOREG 1
+        JUMP L6
 L8:
-		PUSHG 1
-		PUSHG 0
-		LOADN
-		PUSHG 3
-		INF
-		JZ L9
-		PUSHG 1
-		PUSHG 0
-		LOADN
-		STOREG 3
+        PUSHG 1
+        PUSHG 0
+        LOADN
+        PUSHG 3
+        INF
+        JZ L9
+        PUSHG 1
+        PUSHG 0
+        LOADN
+        STOREG 3
 L9:
-		JUMP L7
+        JUMP L7
 L5:
-		PUSHS "O menor elemento é o: "
-		WRITES
-		PUSHG 3
-		WRITEI
-		STOP
+        PUSHS "O menor elemento é o: "
+        WRITES
+        PUSHG 3
+        WRITEI
+        STOP
 
 \end{verbatim}
 
@@ -395,7 +395,7 @@ Para aprimorar os resultados obtidos neste projecto os seguntes pontos deverão 
 Código do Analisador Léxico para reconhecer os símbolos terminais:
 \begin{verbatim}
 %{
-	#include <stdlib.h>
+    #include <stdlib.h>
 %}
 %x COMENTARIO
 
@@ -406,76 +406,76 @@ pal [a-zA-Z]+
 
 %%
 
-\/\/.*			{
-					;
-				}
+\/\/.*          {
+                    ;
+                }
 
-"int"	     	{ 
-					return INT; 
-				}
+"int"             { 
+                    return INT; 
+                }
 
-"string"     	{ 
-					return STRING; 
-				}
+"string"         { 
+                    return STRING; 
+                }
 
-"if"			{
-					return IF;
-				}
+"if"            {
+                    return IF;
+                }
 
-"else"			{
-					return ELSE;
-				}
+"else"          {
+                    return ELSE;
+                }
 
-"while"			{
-					return WHILE;
-				}
+"while"         {
+                    return WHILE;
+                }
 
-"for"			{
-					return FOR;
-				}
+"for"           {
+                    return FOR;
+                }
 
-"print"			{
-					return PRINT;
-				}
+"print"         {
+                    return PRINT;
+                }
 
-"input"			{
-					return INPUT;
-				}
+"input"         {
+                    return INPUT;
+                }
 
-[+-]				{
-						yylval.valOp = yytext[0];
-						return OpA;
-					}
+[+-]                {
+                        yylval.valOp = yytext[0];
+                        return OpA;
+                    }
 
-[*\/%]				{
-						yylval.valOp = yytext[0];
-						return OpM;
-					}
+[*\/%]              {
+                        yylval.valOp = yytext[0];
+                        return OpM;
+                    }
 
-\"[^\"]*\"			{yylval.valc = strdup(yytext);return str;BEGIN INITIAL;}					
+\"[^\"]*\"          {yylval.valc = strdup(yytext);return str;BEGIN INITIAL;}
 
-(([<>][=]?)|"=="|"!=")		{
-								yylval.valc = strdup(yytext);
-								return OpComp;
-							}					
+(([<>][=]?)|"=="|"!=")      {
+                                yylval.valc = strdup(yytext);
+                                return OpComp;
+                            }
 
-([<>\(\)\{\}\[\];=!&]|"|")		{
-								return yytext[0]; 
-							}
+([<>\(\)\{\}\[\];=!&]|"|")      {
+                                return yytext[0]; 
+                            }
 
-{pal}			{ 
-					yylval.valc = strdup(yytext);
-					return id;
-				}
+{pal}           { 
+                    yylval.valc = strdup(yytext);
+                    return id;
+                }
 
-{num}			{
-					yylval.vali = atoi(yytext);
-					return num;
-				}
+{num}           {
+                    yylval.vali = atoi(yytext);
+                    return num;
+                }
 
-.|\n      		{ 
-					; 
-				}
+.|\n            { 
+                    ; 
+                }
 
 %%
 
@@ -487,80 +487,80 @@ int yywrap()
 Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máquina:
 \begin{verbatim}
 %{
-	#include <stdio.h>
-	#include <stdlib.h>
-	#include <string.h>
-	#include "hashTable.h"
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include "hashTable.h"
 
-	int countLabel=1;
-	int labelStack[100], sp=0;
-	FILE *f;
+    int countLabel=1;
+    int labelStack[100], sp=0;
+    FILE *f;
 
-	HashTable symbolTable;
-	char **bloco;
-	int i;
+    HashTable symbolTable;
+    char **bloco;
+    int i;
 
-	void insertSymbol(char* symb, char* type, int tamanho){
+    void insertSymbol(char* symb, char* type, int tamanho){
 
-		int res;
-		char aux[1000];
+        int res;
+        char aux[1000];
 
-		res = hashInsert(symbolTable, symb, type, tamanho);
+        res = hashInsert(symbolTable, symb, type, tamanho);
 
-		if(res == 0){
-			sprintf(aux,"Variável '%s' já definida.",symb);
-			yyerror(aux);
-		}
-	}
+        if(res == 0){
+            sprintf(aux,"Variável '%s' já definida.",symb);
+            yyerror(aux);
+        }
+    }
 
-	int checkSymbol(char* symb){
+    int checkSymbol(char* symb){
 
-		int res;
-		char aux[1000];
+        int res;
+        char aux[1000];
 
-		res = hashContains(symbolTable, symb);
+        res = hashContains(symbolTable, symb);
 
-		if(res == 0){
-			sprintf(aux,"Variável '%s' não definida.",symb);
-			yyerror(aux);
-		}
-		return res;
-	}
+        if(res == 0){
+            sprintf(aux,"Variável '%s' não definida.",symb);
+            yyerror(aux);
+        }
+        return res;
+    }
 
-	char* checkType(char* symb){
+    char* checkType(char* symb){
 
-		int res;
+        int res;
 
-		res = hashContains(symbolTable, symb);
+        res = hashContains(symbolTable, symb);
 
-		if(res == 0){
-			return "ND";
-		}
-		else{
-			return hashType(symbolTable,symb);
-		}
-	}
+        if(res == 0){
+            return "ND";
+        }
+        else{
+            return hashType(symbolTable,symb);
+        }
+    }
 
-	void checkSymbolInit(char* symb){
+    void checkSymbolInit(char* symb){
 
-		int res;
+        int res;
 
-		res = hashIsInit(symbolTable, symb);
+        res = hashIsInit(symbolTable, symb);
 
-	//	printf("Warning linha %d: Variável '%s' não inicializada!\n",symb);
-	}
+    //    printf("Warning linha %d: Variável '%s' não inicializada!\n",symb);
+    }
 
-	void initSymbol(char* symb){
+    void initSymbol(char* symb){
 
-		hashInit(symbolTable, symb);
-	}
+        hashInit(symbolTable, symb);
+    }
 
 %}
 
 %union {
-	int vali;
-	char* valc;
-	char valOp;
+    int vali;
+    char* valc;
+    char valOp;
 }
 
 %token STRING INT IF ELSE WHILE FOR PRINT INPUT 
@@ -574,325 +574,325 @@ Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máqui
 
 %%
 
-Prog	:	Declss Instrs	{fprintf(f,"\tSTOP\n");}
-		;
+Prog    :   Declss Instrs   {fprintf(f,"\tSTOP\n");}
+        ;
 
-Declss	:	Decls 			{fprintf(f,"\tSTART\n");}
+Declss  :   Decls      {fprintf(f,"\tSTART\n");}
 
-Decls	:	InitVar			{}
-		|	Decls InitVar	{}
-		;
+Decls   :   InitVar         {}
+        |   Decls InitVar   {}
+        ;
 
-InitVar	:	INT Var '[' num ']' ';'	{
-										insertSymbol($2,"arrayint",$4);
-										fprintf(f,"\tPUSHN %d\n", $4);
-									}
-										
-		|	INT Var ';'				{
-										insertSymbol($2,"int",0);
-										fprintf(f,"\tPUSHI 0\n");
-									}
+InitVar :   INT Var '[' num ']' ';' {
+                                        insertSymbol($2,"arrayint",$4);
+                                        fprintf(f,"\tPUSHN %d\n", $4);
+                                    }
+                                        
+        |   INT Var ';'             {
+                                        insertSymbol($2,"int",0);
+                                        fprintf(f,"\tPUSHI 0\n");
+                                    }
 
-		|	STRING Var ';'			{
-										insertSymbol($2,"string",0);
-										fprintf(f,"\tPUSHS \"\"\n");
-									}
-		;
+        |   STRING Var ';'          {
+                                        insertSymbol($2,"string",0);
+                                        fprintf(f,"\tPUSHS \"\"\n");
+                                    }
+        ;
 
-Var		:	id				{$$ = $1;}
-		;
+Var     :   id              {$$ = $1;}
+        ;
 
-Instrs	:	Instr 			{}
-		|	Instrs Instr 	{}
-		;	
+Instrs  :   Instr           {}
+        |   Instrs Instr    {}
+        ;    
 
-Instr	:	If 				{}
-		|	While 			{}
-		|	For 			{}
-		|	Atr	';'			{}
-		|	IO ';'			{}
-		;
+Instr   :   If              {}
+        |   While           {}
+        |   For             {}
+        |   Atr ';'         {}
+        |   IO ';'          {}
+        ;
 
-If 		:	IF '(' Cond ')'	{
-								labelStack[sp++] = countLabel++;
-								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
-							}
-			'{' Instrs '}'	Else
-		;
+If      :   IF '(' Cond ')' {
+                                labelStack[sp++] = countLabel++;
+                                fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
+                            }
+            '{' Instrs '}'  Else
+        ;
 
-Else 	:					{	
-								fprintf(f,"L%d:\n",labelStack[--sp]);
-							}
-		|	ELSE 			{
-								fprintf(f,"\tJUMP L%d\n",countLabel);
-								fprintf(f,"L%d:\n",labelStack[--sp]);
-								labelStack[sp++] = countLabel++;
-							} 
-			'{' Instrs '}'	{
-								fprintf(f,"L%d:\n",labelStack[--sp]);
-								}
-		;
+Else    :                   {    
+                                fprintf(f,"L%d:\n",labelStack[--sp]);
+                            }
+        |   ELSE            {
+                                fprintf(f,"\tJUMP L%d\n",countLabel);
+                                fprintf(f,"L%d:\n",labelStack[--sp]);
+                                labelStack[sp++] = countLabel++;
+                            } 
+            '{' Instrs '}'  {
+                                fprintf(f,"L%d:\n",labelStack[--sp]);
+                            }
+        ;
 
-While 	: 	WHILE 			{
-								labelStack[sp++] = countLabel++;
-								fprintf(f,"L%d:\n",countLabel);
-							}
-			'(' Cond ')' 	{
-								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
-								labelStack[sp++] = countLabel++;
-							}
-			'{' Instrs '}'	{
-								fprintf(f,"\tJUMP L%d\n",labelStack[--sp]);
-								fprintf(f,"L%d:\n",labelStack[--sp]);
-							}
-		;
+While   :   WHILE           {
+                                labelStack[sp++] = countLabel++;
+                                fprintf(f,"L%d:\n",countLabel);
+                            }
+            '(' Cond ')'    {
+                                fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
+                                labelStack[sp++] = countLabel++;
+                            }
+            '{' Instrs '}'  {
+                                fprintf(f,"\tJUMP L%d\n",labelStack[--sp]);
+                                fprintf(f,"L%d:\n",labelStack[--sp]);
+                            }
+        ;
 
-For		:	FOR '(' Atr ';' {
-								labelStack[sp++] = countLabel++;
-								fprintf(f,"L%d:\n",countLabel);
-							}
-			Cond ';' 		{
-								fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
-								fprintf(f,"\tJUMP L%d\n",countLabel+2);
-								labelStack[sp++] = countLabel++;
-								fprintf(f,"L%d:\n",countLabel++);
-							}
-			Atr ')' 		{	
-								fprintf(f,"\tJUMP L%d\n", countLabel-2);
-								fprintf(f,"L%d:\n",countLabel++);
-							}
-			'{' Instrs '}'	{
-								fprintf(f,"\tJUMP L%d\n",labelStack[--sp]+1);
-								fprintf(f,"L%d:\n",labelStack[--sp]);
-							}
-		;
+For     :   FOR '(' Atr ';' {
+                                labelStack[sp++] = countLabel++;
+                                fprintf(f,"L%d:\n",countLabel);
+                            }
+            Cond ';'        {
+                                fprintf(f,"\tJZ L%d\n",labelStack[sp-1]);
+                                fprintf(f,"\tJUMP L%d\n",countLabel+2);
+                                labelStack[sp++] = countLabel++;
+                                fprintf(f,"L%d:\n",countLabel++);
+                            }
+            Atr ')'         {
+                                fprintf(f,"\tJUMP L%d\n", countLabel-2);
+                                fprintf(f,"L%d:\n",countLabel++);
+                            }
+            '{' Instrs '}'  {
+                                fprintf(f,"\tJUMP L%d\n",labelStack[--sp]+1);
+                                fprintf(f,"L%d:\n",labelStack[--sp]);
+                            }
+        ;
 
-IO		:	PRINT Out		{}
-		|	INPUT Var 		{
-								fprintf(f,"\tREAD\n");
-								fprintf(f,"\tATOI\n");
-								fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$2));
-							}
-		;
+IO      :   PRINT Out       {}
+        |   INPUT Var       {
+                                fprintf(f,"\tREAD\n");
+                                fprintf(f,"\tATOI\n");
+                                fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$2));
+                            }
+        ;
 
-Out		:	Exp				{
-								if($1==1){
-									fprintf(f,"\tWRITEI\n");
-								}
-								else{
-									fprintf(f,"\tWRITES\n");
-								}
-							}
+Out     :   Exp             {
+                                if($1==1){
+                                    fprintf(f,"\tWRITEI\n");
+                                }
+                                else{
+                                    fprintf(f,"\tWRITES\n");
+                                }
+                            }
 
-		|	str				{
-								fprintf(f,"\tPUSHS %s\n",$1);
-								fprintf(f,"\tWRITES\n");
-							}
-		;
+        |   str             {
+                                fprintf(f,"\tPUSHS %s\n",$1);
+                                fprintf(f,"\tWRITES\n");
+                            }
+        ;
 
-Atr		:	Var '=' Exp	{
-									char aux[1000];
-								if(strcmp(checkType($1),"arrayint")!=0){
-									if(strcmp(checkType($1),"int")==0){
-										if($3==1){
-											if(checkSymbol($1)){
-												initSymbol($1);
-												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
-											}
-										}
-										else{
-											yyerror("Tipos diferentes");
-										}
-									}
-									else if(strcmp(checkType($1),"string")==0){
-										if($3==2){
-											if(checkSymbol($1)){
-												initSymbol($1);
-												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
-											}
-										}
-										else{
-											yyerror("Tipos diferentes");
-										}
-									}
-									else if(strcmp(checkType($1),"arrayint")==0){
-										if($3==1){
-											if(checkSymbol($1)){
-												initSymbol($1);
-												fprintf(f,"\tLOADN\n");	
-											}
-										}
-										else{
-											yyerror("Tipos diferentes");
-										}
-									}
-									else if(strcmp(checkType($1),"ND")==0){
-										sprintf(aux,"Variável '%s' não definida.",$1);
-										yyerror(aux);
-									}
-								}
-								else{
-									yyerror("Tipos diferentes");
-								}
-						}
-		|	Var '[' Exp ']' '=' Exp {	
-										if(strcmp(checkType($1),"arrayint")==0){
-											fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-											fprintf(f,"\tSTOREN\n");
-										}
-										else{
-											yyerror("Tipos diferentes");
-										}
-									}
-		;
+Atr     :   Var '=' Exp {
+                                    char aux[1000];
+                                if(strcmp(checkType($1),"arrayint")!=0){
+                                    if(strcmp(checkType($1),"int")==0){
+                                        if($3==1){
+                                            if(checkSymbol($1)){
+                                                initSymbol($1);
+                                                fprintf(f,"\tSTOREG %d\n", 
+                                                    hashInd(symbolTable,$1));
+                                            }
+                                        }
+                                        else{
+                                            yyerror("Tipos diferentes");
+                                        }
+                                    }
+                                    else if(strcmp(checkType($1),"string")==0){
+                                        if($3==2){
+                                            if(checkSymbol($1)){
+                                                initSymbol($1);
+                                                fprintf(f,"\tSTOREG %d\n", 
+                                                    hashInd(symbolTable,$1));
+                                            }
+                                        }
+                                        else{
+                                            yyerror("Tipos diferentes");
+                                        }
+                                    }
+                                    else if(strcmp(checkType($1),"arrayint")==0){
+                                        if($3==1){
+                                            if(checkSymbol($1)){
+                                                initSymbol($1);
+                                                fprintf(f,"\tLOADN\n");
+                                            }
+                                        }
+                                        else{
+                                            yyerror("Tipos diferentes");
+                                        }
+                                    }
+                                    else if(strcmp(checkType($1),"ND")==0){
+                                        sprintf(aux,"Variável '%s' não definida.",$1);
+                                        yyerror(aux);
+                                    }
+                                }
+                                else{
+                                    yyerror("Tipos diferentes");
+                                }
+                        }
+        |   Var '[' Exp ']' '=' Exp {
+                                        if(strcmp(checkType($1),"arrayint")==0){
+                                            fprintf(f,"\tPUSHG %d\n", 
+                                                hashInd(symbolTable,$1));
+                                            fprintf(f,"\tSTOREN\n");
+                                        }
+                                        else{
+                                            yyerror("Tipos diferentes");
+                                        }
+                                    }
+        ;
 
-Exp		:	Termo			{}
-		|	Exp OpA	Termo	{
-								if($1 == 1 && $3 == 1){
-									switch($2){
-										case '+': 
-											fprintf(f,"\tADD\n");
-											break;
-										case '-': 
-											fprintf(f,"\tSUB\n");
-											break;
-										case '|':
-											fprintf(f,"\tADD\n");
-									}
-								}
-								else if($1 == 2 && $3 == 2){
-									switch($2){
+Exp     :   Termo           {}
+        |   Exp OpA Termo   {
+                                if($1 == 1 && $3 == 1){
+                                    switch($2){
+                                        case '+': 
+                                            fprintf(f,"\tADD\n");
+                                            break;
+                                        case '-': 
+                                            fprintf(f,"\tSUB\n");
+                                            break;
+                                        case '|':
+                                            fprintf(f,"\tADD\n");
+                                    }
+                                }
+                                else if($1 == 2 && $3 == 2){
+                                    switch($2){
+                                        case '+': 
+                                            fprintf(f,"\tCONCAT\n");
+                                            break;
+                                        default:
+                                            yyerror("Tipos diferentes");
+                                            break;
+                                    }
+                                }
+                                else{
+                                    yyerror("Tipos diferentes");
+                                }
+                            }
+        ;
 
-										case '+': 
-											fprintf(f,"\tCONCAT\n");
-											break;
-										default:
-											yyerror("Tipos diferentes");
-											break;
-									}
-								}
-								else{
-									yyerror("Tipos diferentes");
-								}
-							}
-		;
+Termo   :   Fator           {$$ = $1;}
+        |   Termo OpM Fator {
+                                if($1 == 1 && $3 == 1){
+                                    switch($2){
+                                        case '/': 
+                                            fprintf(f,"\tDIV\n");
+                                            break;
+                                        case '*': 
+                                            fprintf(f,"\tMUL\n");
+                                            break;
+                                        case '%': 
+                                            fprintf(f,"\tMOD\n");
+                                            break;
+                                        case '&':
+                                            fprintf(f,"\tMUL\n");
+                                            break;
+                                    }
+                                }
+                                else{
+                                    yyerror("Tipos diferentes");
+                                }
+                            }
+        ;
 
-Termo	:	Fator			{$$ = $1;}
-		|	Termo OpM Fator	{
-								if($1 == 1 && $3 == 1){
-									switch($2){	
+Fator   :   Var     {
+                                if(checkSymbol($1))
+                                    checkSymbolInit($1);
 
-										case '/': 
-											fprintf(f,"\tDIV\n");
-											break;
-										case '*': 
-											fprintf(f,"\tMUL\n");
-											break;
-										case '%': 
-											fprintf(f,"\tMOD\n");
-											break;
-										case '&':
-											fprintf(f,"\tMUL\n");
-											break;
-									}
-								}
-								else{
-									yyerror("Tipos diferentes");
-								}
-							}
-		;
+                                if(strcmp(checkType($1),"int")==0){
+                                    $$=1;
+                                    fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
+                                }
+                                else if(strcmp(checkType($1),"string")==0){
+                                    $$=2;
+                                    fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
+                                }
+                                else{
+                                }
+                    }
 
-Fator	:	Var		{
-								if(checkSymbol($1))
-									checkSymbolInit($1);
+        |   Var '[' Exp ']'     {
+                                    if(strcmp(checkType($1),"arrayint")==0){
+                                        $$=1;
+                                        printf("%s\n",checkType($1));
+                                        fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
+                                        fprintf(f,"\tLOADN\n");
+                                    }
+                                    else{
+                                        yyerror("Tipos diferentes");
+                                    }
+                                }
+        |   num             {$$ = 1; fprintf(f,"\tPUSHI %d\n", $1);}
+        |   str             {$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
+        |   '(' Exp ')'     {}
+        |   '!' Exp         {}
+        ;
 
-								if(strcmp(checkType($1),"int")==0){
-									$$=1;
-									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-								}
-								else if(strcmp(checkType($1),"string")==0){
-									$$=2;
-									fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-								}
-								else{
-								}
-					}
+Cond    :   Comp                {}
+        |   '(' Cond ')'        {}
+        |   Cond '&''&' Cond    {
+                                    fprintf(f,"\tMUL\n");
+                                }
+        |   Cond '|''|' Cond    {
+                                    fprintf(f,"\tADD\n");
+                                }
+        ;
 
-		|	Var '[' Exp ']' 	{
-									if(strcmp(checkType($1),"arrayint")==0){
-										$$=1;
-										printf("%s\n",checkType($1));
-										fprintf(f,"\tPUSHG %d\n", hashInd(symbolTable,$1));
-										fprintf(f,"\tLOADN\n");
-									}
-									else{
-										yyerror("Tipos diferentes");
-									}
-								}
-		|	num				{$$ = 1; fprintf(f,"\tPUSHI %d\n", $1);}
-		|	str 			{$$ = 2; fprintf(f,"\tPUSHS %s\n", $1);}
-		|	'(' Exp ')'		{}
-		|	'!' Exp			{}
-		;
+Comp    :   Exp             {}
+        |   Exp OpComp Exp  {
+                                switch($2[0]){
+                                    case '>':
+                                        if($2[1] == '='){
+                                            fprintf(f,"\tSUPEQ\n");
+                                        }
+                                        else{
+                                            fprintf(f,"\tSUP\n");
+                                        }
+                                        break;
+                                    case '<':
+                                        if($2[1] == '='){
+                                            fprintf(f,"\tINFEQ\n");
+                                        }
+                                        else{
+                                            fprintf(f,"\tINF\n");
+                                        }
+                                        break;
+                                    case '=':
+                                        fprintf(f,"\tEQUAL\n");
+                                        break;
+                                    case '!':
+                                        fprintf(f,"\tEQUAL\n");
+                                        fprintf(f,"\tNOT\n");
+                                        break;
 
-Cond	:	 Comp 				{}
-		|	'(' Cond ')'		{}
-		|	Cond '&''&' Cond 	{
-									fprintf(f,"\tMUL\n");
-								}
-		|	Cond '|''|' Cond 	{
-									fprintf(f,"\tADD\n");
-								}
-		;
-
-Comp	:	Exp				{}
-		|	Exp OpComp Exp	{
-								switch($2[0]){
-
-									case '>':
-										if($2[1] == '='){
-											fprintf(f,"\tSUPEQ\n");
-										}
-										else{
-											fprintf(f,"\tSUP\n");
-										}
-										break;
-									case '<':
-										if($2[1] == '='){
-											fprintf(f,"\tINFEQ\n");
-										}
-										else{
-											fprintf(f,"\tINF\n");
-										}
-										break;
-									case '=':
-										fprintf(f,"\tEQUAL\n");
-										break;
-									case '!':
-										fprintf(f,"\tEQUAL\n");
-										fprintf(f,"\tNOT\n");
-										break;
-
-								}
-							}
-		;
+                                }
+                            }
+        ;
 
 %%
 
 #include "lex.yy.c"
 
 int yyerror(char *s){
-	printf("Erro Sintático linha %d: %s\n",yylineno, s);
+    printf("Erro Sintático linha %d: %s\n",yylineno, s);
 }
      
 int main(){
 
-	symbolTable = hashCreate(1000);
-	bloco = malloc(sizeof(char*)*1000);
-	f = fopen("assembly","w");
-	yyparse(); 
-	return 0; 
-}	
+    symbolTable = hashCreate(1000);
+    bloco = malloc(sizeof(char*)*1000);
+    f = fopen("assembly","w");
+    yyparse(); 
+    return 0; 
+}
 
 \end{verbatim}
 
