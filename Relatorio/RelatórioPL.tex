@@ -396,7 +396,7 @@ Para aprimorar os resultados obtidos neste projecto os seguntes pontos deverão 
 
 \appendix
 \chapter{Código do Programa}
-Código do Analisador Léxico para reconhecer os símbolos terminais:
+\section{Analisador Léxico}Código do Analisador Léxico para reconhecer os símbolos terminais:
 \begin{verbatim}
 %{
     #include <stdlib.h>
@@ -487,8 +487,7 @@ int yywrap()
     { return(1); }
 
 \end{verbatim}
-
-Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máquina:
+\section{Analisador Sintático}Código do Analisador Sintático/Analisador Semântico/Gerador de Código Máquina:
 \begin{verbatim}
 %{
     #include <stdio.h>
