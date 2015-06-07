@@ -151,7 +151,6 @@ Para realizarmos a análise semântica temos uma tabela de Hash para guardar tod
 struct list{
     char *key;
     char *type;
-    int init;
     int ind;
     struct list* next;
 };
@@ -162,7 +161,7 @@ struct table{
     struct list **list;
 };
 \end{verbatim}
-Com a estrutura acima referida podemos então informações sobre uma variável (Identificador, Tipo, Estado de Inicialização e Índice do Registo na Máquina).
+Com a estrutura acima referida podemos então informações sobre uma variável (Identificador, Tipo e Índice do Registo na Máquina).
 
 \section{Exemplos de Programas da Linguagem}
 Abaixo irão estar apresentados vários programas, em que os dois primeiros não cumprem os requisitos sintáticos (\ref{esint}) e semânticos (\ref{esem}) da nossa linguagem. Posteriormente iremos apresentar um programa que esteja sintática e semanticamente correcto (\ref{pc}).
@@ -456,7 +455,7 @@ pal [a-zA-Z]+
                         return OpM;
                     }
 
-\"[^\"]*\"          {yylval.valc = strdup(yytext);return str;BEGIN INITIAL;}
+\"[^\"]*\"          {yylval.valc = strdup(yytext);return str;}
 
 (([<>][=]?)|"=="|"!=")      {
                                 yylval.valc = strdup(yytext);
@@ -539,20 +538,6 @@ int yywrap()
         else{
             return hashType(symbolTable,symb);
         }
-    }
-
-    void checkSymbolInit(char* symb){
-
-        int res;
-
-        res = hashIsInit(symbolTable, symb);
-
-    //    printf("Warning linha %d: Variável '%s' não inicializada!\n",symb);
-    }
-
-    void initSymbol(char* symb){
-
-        hashInit(symbolTable, symb);
     }
 
 %}
@@ -696,7 +681,6 @@ Atr     :   Var '=' Exp {
                                     if(strcmp(checkType($1),"int")==0){
                                         if($3==1){
                                             if(checkSymbol($1)){
-                                                initSymbol($1);
                                                 fprintf(f,"\tSTOREG %d\n", 
                                                     hashInd(symbolTable,$1));
                                             }
@@ -708,7 +692,6 @@ Atr     :   Var '=' Exp {
                                     else if(strcmp(checkType($1),"string")==0){
                                         if($3==2){
                                             if(checkSymbol($1)){
-                                                initSymbol($1);
                                                 fprintf(f,"\tSTOREG %d\n", 
                                                     hashInd(symbolTable,$1));
                                             }
@@ -720,7 +703,6 @@ Atr     :   Var '=' Exp {
                                     else if(strcmp(checkType($1),"arrayint")==0){
                                         if($3==1){
                                             if(checkSymbol($1)){
-                                                initSymbol($1);
                                                 fprintf(f,"\tLOADN\n");
                                             }
                                         }
@@ -804,8 +786,7 @@ Termo   :   Fator           {$$ = $1;}
         ;
 
 Fator   :   Var     {
-                                if(checkSymbol($1))
-                                    checkSymbolInit($1);
+                                checkSymbol($1);
 
                                 if(strcmp(checkType($1),"int")==0){
                                     $$=1;

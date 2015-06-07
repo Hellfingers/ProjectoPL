@@ -50,20 +50,6 @@
 		}
 	}
 
-	void checkSymbolInit(char* symb){
-
-		int res;
-
-		res = hashIsInit(symbolTable, symb);
-
-	//	printf("Warning linha %d: Variável '%s' não inicializada!\n",symb);
-	}
-
-	void initSymbol(char* symb){
-
-		hashInit(symbolTable, symb);
-	}
-
 %}
 
 %union {
@@ -205,7 +191,6 @@ Atr		:	Var '=' Exp	{
 									if(strcmp(checkType($1),"int")==0){
 										if($3==1){
 											if(checkSymbol($1)){
-												initSymbol($1);
 												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
@@ -216,7 +201,6 @@ Atr		:	Var '=' Exp	{
 									else if(strcmp(checkType($1),"string")==0){
 										if($3==2){
 											if(checkSymbol($1)){
-												initSymbol($1);
 												fprintf(f,"\tSTOREG %d\n", hashInd(symbolTable,$1));	
 											}
 										}
@@ -227,7 +211,6 @@ Atr		:	Var '=' Exp	{
 									else if(strcmp(checkType($1),"arrayint")==0){
 										if($3==1){
 											if(checkSymbol($1)){
-												initSymbol($1);
 												fprintf(f,"\tLOADN\n");	
 											}
 										}
@@ -307,8 +290,7 @@ Termo	:	Fator			{$$ = $1;}
 		;
 
 Fator	:	Var		{
-								if(checkSymbol($1))
-									checkSymbolInit($1);
+								checkSymbol($1);
 
 								if(strcmp(checkType($1),"int")==0){
 									$$=1;

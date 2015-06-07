@@ -5,7 +5,6 @@
 struct list{
 	char *key;
 	char *type;
-	int init;
 	int ind;
 	struct list* next;
 };
@@ -81,36 +80,6 @@ int hashContains(struct table* t, char* key){
 	}
 
 	return 0;
-}
-
-int hashIsInit(struct table* t, char* key){
-
-	struct list* aux;
-	int h=hash(key)%t->size;
-
-	if(!hashContains(t,key))
-		return 0;
-
-	for(aux = t->list[h];aux != NULL;aux = aux->next)
-		if(strcmp(key,aux->key) == 0)
-			return aux->init;
-
-}
-
-int hashInit(struct table* t, char* key){
-
-	struct list* aux;
-	int h=hash(key)%t->size;
-
-	if(!hashContains(t,key))
-		return 0;
-
-	for(aux = t->list[h];aux != NULL;aux = aux->next)
-		if(strcmp(key,aux->key) == 0)
-			aux->init = 1;
-
-	return 1;
-
 }
 
 int hashInd(struct table* t, char* key){

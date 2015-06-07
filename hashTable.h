@@ -6,8 +6,6 @@ typedef struct table* HashTable;
 HashTable hashCreate(int size);
 int hashInsert(HashTable t, char* key, char* type);
 int hashContains(HashTable t, char* key);
-int hashIsInit(HashTable t, char* key);
-int hashInit(HashTable t, char* key);
 int hashInd(HashTable t, char* key);
 char* hashType(HashTable t, char *key);
 
