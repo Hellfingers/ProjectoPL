@@ -513,7 +513,7 @@ int yywrap()
         int res;
         char aux[1000];
 
-        res = hashInsert(symbolTable, symb, type, tamanho);
+        res = hashInsert(symbolTable, symb, type);
 
         if(res == 0){
             sprintf(aux,"Variável '%s' já definida.",symb);

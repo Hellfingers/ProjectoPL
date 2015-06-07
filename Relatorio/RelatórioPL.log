@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.3.28)  7 JUN 2015 18:13
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2015.3.28)  7 JUN 2015 18:20
 entering extended mode
  %&-line parsing enabled.
 **RelatórioPL.tex
@@ -702,7 +702,7 @@ EQ\n");[]
 Here is how much of TeX's memory you used:
  2680 strings out of 495061
  35753 string characters out of 1182621
- 104328 words of memory out of 3000000
+ 104319 words of memory out of 3000000
  5867 multiletter control sequences out of 15000+50000
  10543 words of font info for 37 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
@@ -715,7 +715,7 @@ exlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts
 /type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/publ
 ic/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 /cm/cmtt10.pfb>
-Output written on RelatórioPL.pdf (25 pages, 148569 bytes).
+Output written on RelatórioPL.pdf (25 pages, 148563 bytes).
 PDF statistics:
  115 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
