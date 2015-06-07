@@ -398,7 +398,7 @@ Para aprimorar os resultados obtidos neste projecto os seguntes pontos deverão 
 \section{Analisador Léxico}Código do Analisador Léxico para reconhecer os símbolos terminais:
 \begin{verbatim}
 %{
-	#include <stdlib.h>
+    #include <stdlib.h>
 %}
 %x COMENTARIO
 
@@ -410,84 +410,84 @@ pal [a-zA-Z]+
 %%
 
 
-.*\/\/.*		{
-					;
-				}
-		
-.*\/\*			{
-					BEGIN COMENTARIO;
-				}
+.*\/\/.*        {
+                    ;
+                }
+        
+.*\/\*          {
+                    BEGIN COMENTARIO;
+                }
 
-<COMENTARIO>\*\/	{BEGIN INITIAL;}
+<COMENTARIO>\*\/    {BEGIN INITIAL;}
 
-<COMENTARIO>.|\n 	{;}
+<COMENTARIO>.|\n    {;}
 
-"int"	     	{ 
-					return INT; 
-				}
+"int"           { 
+                    return INT; 
+                }
 
-"string"     	{ 
-					return STRING; 
-				}
+"string"        { 
+                    return STRING; 
+                }
 
-"if"			{
-					return IF;
-				}
+"if"            {
+                    return IF;
+                }
 
-"else"			{
-					return ELSE;
-				}
+"else"          {
+                    return ELSE;
+                }
 
-"while"			{
-					return WHILE;
-				}
+"while"         {
+                    return WHILE;
+                }
 
-"for"			{
-					return FOR;
-				}
+"for"           {
+                    return FOR;
+                }
 
-"print"			{
-					return PRINT;
-				}
+"print"         {
+                    return PRINT;
+                }
 
-"input"			{
-					return INPUT;
-				}
+"input"         {
+                    return INPUT;
+                }
 
-[+-]				{
-						yylval.valOp = yytext[0];
-						return OpA;
-					}
+[+-]                {
+                        yylval.valOp = yytext[0];
+                        return OpA;
+                    }
 
-[*\/%]				{
-						yylval.valOp = yytext[0];
-						return OpM;
-					}
+[*\/%]              {
+                        yylval.valOp = yytext[0];
+                        return OpM;
+                    }
 
-\"[^\"]*\"			{yylval.valc = strdup(yytext);return str;}
+\"[^\"]*\"          {yylval.valc = strdup(yytext);return str;}
 
-(([<>][=]?)|"=="|"!=")		{
-								yylval.valc = strdup(yytext);
-								return OpComp;
-							}					
+(([<>][=]?)|"=="|"!=")      {
+                                yylval.valc = strdup(yytext);
+                                return OpComp;
+                            }                    
 
-([<>\(\)\{\}\[\];=!&]|"|")		{
-								return yytext[0]; 
-							}
+([<>\(\)\{\}\[\];=!&]|"|")  {
+                                return yytext[0]; 
+                            }
 
-{pal}			{ 
-					yylval.valc = strdup(yytext);
-					return id;
-				}
+{pal}           { 
+                    yylval.valc = strdup(yytext);
+                    return id;
+                }
 
-{num}			{
-					yylval.vali = atoi(yytext);
-					return num;
-				}
+{num}           {
+                    yylval.vali = atoi(yytext);
+                    return num;
+                }
 
-.|\n      		{ 
-					; 
-				}
+.|\n            { 
+                    ; 
+                }
 
 %%
 
