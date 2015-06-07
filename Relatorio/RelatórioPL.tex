@@ -865,7 +865,6 @@ Comp    :   Exp             {}
                                 }
                             }
         ;
-
 %%
 
 #include "lex.yy.c"
@@ -875,7 +874,6 @@ int yyerror(char *s){
 }
      
 int main(){
-
     symbolTable = hashCreate(1000);
     f = fopen("assembly","w");
     yyparse(); 
